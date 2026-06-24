@@ -1,0 +1,159 @@
+<svg viewBox="0 0 1020 880" xmlns="http://www.w3.org/2000/svg" role="img" font-family="ui-sans-serif, system-ui, Segoe UI, sans-serif">
+  <title>The Jarvis / Rhonda Architecture — contract-verified plan-and-execute with cascade recovery (c) 2026 Russell Miller</title>
+  <desc>A deterministic-first agent architecture. Jarvis is the LLM brain (a fast Pilot runs the loop; a smarter Planner/Strategist decomposes and recovers). Servo is the deterministic hands and eyes: it drives the browser and runs a contract check after each action with no LLM. Rhonda is the self-healing runner that replays recipes and enforces each step's pre and post conditions. On a failed deterministic check the system escalates to the smarter model to replan.</desc>
+  <style>
+    .bg{fill:#faf9f6}
+    .ink{fill:#1e1b2e}.mut{fill:#6b7280}
+    .h1{font-size:25px;font-weight:800}.h2{font-size:13px;font-weight:600}
+    .card-t{font-size:14px;font-weight:800;letter-spacing:.02em}
+    .t{font-size:13.5px;font-weight:700}.s{font-size:11px}.tiny{font-size:10px}
+    .llm{fill:#eef2ff;stroke:#4f46e5;stroke-width:2}
+    .det{fill:#ecfeff;stroke:#0d9488;stroke-width:1.8}
+    .detb{fill:#cffafe;stroke:#0d9488;stroke-width:2.6}
+    .neu{fill:#f5f5f4;stroke:#a8a29e;stroke-width:1.6}
+    .cast{fill:#ffffff;stroke:#e7e5e4;stroke-width:1.5}
+    .cont{fill:#ffffff;stroke:#cbd5e1;stroke-width:1.6;stroke-dasharray:5 4}
+    .e{stroke:#57534e;stroke-width:1.7;fill:none}
+    .eg{stroke:#15803d;stroke-width:2;fill:none}
+    .er{stroke:#dc2626;stroke-width:2.2;fill:none}
+  </style>
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#57534e"/></marker>
+    <marker id="ag" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#15803d"/></marker>
+    <marker id="ar" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#dc2626"/></marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1020" height="880"/>
+
+  <!-- header -->
+  <text class="h1 ink" x="34" y="44">The Jarvis · Rhonda Architecture</text>
+  <text class="h2 mut" x="35" y="66">Contract-verified plan-and-execute with cascade recovery — a deterministic-first design for reliable browser agents</text>
+  <text class="tiny mut" x="986" y="28" text-anchor="end">© 2026 Russell Miller</text>
+
+  <!-- ===== CAST (left) ===== -->
+  <text class="card-t mut" x="34" y="108">THE CAST</text>
+
+  <rect class="cast" x="30" y="120" width="300" height="120" rx="11"/>
+  <rect class="llm" x="30" y="120" width="8" height="120" rx="4"/>
+  <text class="card-t ink" x="52" y="146">JARVIS — the brain (LLM)</text>
+  <text class="s mut" x="52" y="168">Two tiers. A fast <tspan font-weight="700">Pilot</tspan> runs the live loop:</text>
+  <text class="s mut" x="52" y="184">pick the tool, do the next step, plan a move ahead.</text>
+  <text class="s mut" x="52" y="204">A smarter <tspan font-weight="700">Planner / Strategist</tspan> decomposes vague</text>
+  <text class="s mut" x="52" y="220">goals and takes over when something breaks.</text>
+
+  <rect class="cast" x="30" y="256" width="300" height="120" rx="11"/>
+  <rect class="det" x="30" y="256" width="8" height="120" rx="4"/>
+  <text class="card-t ink" x="52" y="282">SERVO — hands + eyes</text>
+  <text class="s mut" x="52" y="304">Deterministic browser automation. Drives the real</text>
+  <text class="s mut" x="52" y="320">page by durable targets, AND runs the <tspan font-weight="700">contract</tspan></text>
+  <text class="s mut" x="52" y="336"><tspan font-weight="700">check</tspan> after each action: right page? fields present?</text>
+  <text class="s mut" x="52" y="356">columns, row count, types? <tspan font-weight="700" fill="#0d9488">No LLM here.</tspan></text>
+
+  <rect class="cast" x="30" y="392" width="300" height="124" rx="11"/>
+  <rect class="det" x="30" y="392" width="8" height="124" rx="4"/>
+  <text class="card-t ink" x="52" y="418">RHONDA — the self-healing runner</text>
+  <text class="s mut" x="52" y="440">Replays a saved <tspan font-weight="700">recipe</tspan> step by step. Repairs a</text>
+  <text class="s mut" x="52" y="456">moved / renamed target on its own (and writes the</text>
+  <text class="s mut" x="52" y="472">fix back). Enforces each step's pre/post contract —</text>
+  <text class="s mut" x="52" y="488">stops the run the moment reality stops matching the</text>
+  <text class="s mut" x="52" y="504">plan, instead of scraping garbage.</text>
+
+  <rect class="neu" x="30" y="532" width="300" height="92" rx="11"/>
+  <text class="card-t ink" x="48" y="557">THE RECIPE = the intermediate language</text>
+  <text class="s mut" x="48" y="579">Each step carries: <tspan font-weight="700" fill="#1e1b2e">intent</tspan> (the goal in words),</text>
+  <text class="s mut" x="48" y="595"><tspan font-weight="700" fill="#0d9488">pre</tspan> (must hold before acting — fail fast),</text>
+  <text class="s mut" x="48" y="611"><tspan font-weight="700" fill="#0d9488">post</tspan> (must hold after), <tspan font-weight="700" fill="#1e1b2e">on_fail</tspan> (what to do).</text>
+
+  <!-- thesis -->
+  <rect class="neu" x="30" y="644" width="300" height="120" rx="11" fill="#fffbeb" stroke="#d97706"/>
+  <text class="card-t ink" x="48" y="669">THE BET</text>
+  <text class="s mut" x="48" y="691">Make the cheap, deterministic part do the verifying.</text>
+  <text class="s mut" x="48" y="707">Reserve the expensive, fallible LLM for the rare</text>
+  <text class="s mut" x="48" y="723">moment a structural check actually fails. Reliability</text>
+  <text class="s mut" x="48" y="739">comes from the FORMAT (richer recipe), not from a</text>
+  <text class="s mut" x="48" y="755">bigger model or an LLM grading its own work.</text>
+
+  <!-- divider -->
+  <line x1="360" y1="100" x2="360" y2="800" stroke="#e7e5e4" stroke-width="1.5"/>
+
+  <!-- ===== FLOW (right) ===== -->
+  <text class="card-t mut" x="392" y="108">THE LOOP</text>
+
+  <!-- goal -->
+  <rect class="neu" x="600" y="118" width="200" height="36" rx="9"/>
+  <text class="t ink" x="700" y="141" text-anchor="middle">User goal</text>
+  <path class="e" d="M700 154 L700 176" marker-end="url(#a)"/>
+
+  <!-- planner -->
+  <rect class="llm" x="520" y="176" width="360" height="48" rx="9"/>
+  <text class="t ink" x="700" y="197" text-anchor="middle">Jarvis · Planner — sketch &amp; decompose</text>
+  <text class="s mut" x="700" y="214" text-anchor="middle">rough plan first, then validate each step</text>
+  <path class="e" d="M700 224 L700 246" marker-end="url(#a)"/>
+
+  <!-- recipe -->
+  <rect class="neu" x="520" y="246" width="360" height="48" rx="9"/>
+  <text class="t ink" x="700" y="267" text-anchor="middle">Recipe — the saved plan</text>
+  <text class="s mut" x="700" y="284" text-anchor="middle">steps: intent · pre · post · on_fail</text>
+  <path class="e" d="M700 294 L700 318" marker-end="url(#a)"/>
+
+  <!-- rhonda container -->
+  <rect class="cont" x="392" y="318" width="470" height="368" rx="13"/>
+  <text class="card-t mut" x="412" y="340">RHONDA — replay each step (deterministic loop)</text>
+
+  <!-- pre -->
+  <rect class="detb" x="430" y="352" width="394" height="46" rx="9"/>
+  <text class="t ink" x="627" y="372" text-anchor="middle">1 · PRE-check — contractCheck (Servo)</text>
+  <text class="s mut" x="627" y="389" text-anchor="middle">are conditions right to even attempt this? fail fast</text>
+  <path class="eg" d="M627 398 L627 420" marker-end="url(#ag)"/>
+  <text class="s" fill="#15803d" x="640" y="414">pass</text>
+
+  <!-- act -->
+  <rect class="det" x="430" y="420" width="394" height="44" rx="9"/>
+  <text class="t ink" x="627" y="440" text-anchor="middle">2 · Servo acts</text>
+  <text class="s mut" x="627" y="456" text-anchor="middle">click / fill / navigate by durable target</text>
+  <path class="e" d="M627 464 L627 486" marker-end="url(#a)"/>
+
+  <!-- post -->
+  <rect class="detb" x="430" y="486" width="394" height="46" rx="9"/>
+  <text class="t ink" x="627" y="506" text-anchor="middle">3 · POST-check — contractCheck (Servo)</text>
+  <text class="s mut" x="627" y="523" text-anchor="middle">did it land in the expected shape?</text>
+  <path class="e" d="M627 532 L627 552" marker-end="url(#a)"/>
+
+  <!-- decision -->
+  <path class="neu" d="M627 556 L693 596 L627 636 L561 596 z"/>
+  <text class="t ink" x="627" y="592" text-anchor="middle">pass?</text>
+  <text class="s ink" x="627" y="609" text-anchor="middle">pass / repair / fail</text>
+
+  <!-- pass loop -->
+  <path class="eg" d="M693 596 L760 596 L760 375 L824 375" marker-end="url(#ag)"/>
+  <text class="s" fill="#15803d" x="712" y="588">pass → next step</text>
+
+  <!-- recoverable self-repair (small) -->
+  <path class="e" d="M561 596 L470 596 L470 398" marker-end="url(#a)"/>
+  <text class="tiny mut" x="436" y="520">recoverable:</text>
+  <text class="tiny mut" x="436" y="533">self-repair,</text>
+  <text class="tiny mut" x="436" y="546">re-run step</text>
+
+  <!-- fail / escalate -->
+  <path class="er" d="M627 636 L627 706 L905 706 L905 252" marker-end="url(#ar)"/>
+  <rect class="neu" x="500" y="702" width="220" height="40" rx="9"/>
+  <text class="t ink" x="610" y="727" text-anchor="middle">on_fail: pause · escalate · continue</text>
+
+  <!-- escalation target -->
+  <rect class="llm" x="760" y="600" width="240" height="56" rx="9"/>
+  <text class="t ink" x="880" y="623" text-anchor="middle">Jarvis · Strategist</text>
+  <text class="s mut" x="880" y="641" text-anchor="middle">replans — the smarter model</text>
+  <path class="er" d="M880 656 L880 686 L905 686" marker-end="url(#ar)"/>
+
+  <text class="card-t" fill="#dc2626" x="918" y="240" text-anchor="end">ESCALATE</text>
+  <text class="s" fill="#dc2626" x="918" y="256" text-anchor="end">structural check failed →</text>
+  <text class="s" fill="#dc2626" x="918" y="270" text-anchor="end">smarter model replans</text>
+
+  <!-- legend -->
+  <rect x="392" y="804" width="15" height="14" rx="3" class="llm"/>
+  <text class="s ink" x="414" y="815">LLM — Jarvis brain tiers</text>
+  <rect x="600" y="804" width="15" height="14" rx="3" class="detb"/>
+  <text class="s ink" x="622" y="815">deterministic — Servo, no LLM</text>
+  <text class="s mut" x="392" y="840">The two bold checks are the contract gate: the loop never trusts an action it didn't verify, and never calls a model to do the verifying.</text>
+  <text class="tiny mut" x="986" y="862" text-anchor="end">© 2026 Russell Miller — the Jarvis · Rhonda architecture</text>
+</svg>
