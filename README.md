@@ -1,6 +1,6 @@
 # Russell Miller — Portfolio
 
-Single-page portfolio for AI product roles and operating-partner consulting.
+Single-page portfolio positioning Russell Miller as an AI operating partner, architect, and value-creation strategist for PE/VC portfolios.
 Static site — `index.html` + `assets/`. No build step.
 
 **Design:** sky-blue + slate-gray on light gray ("sky and rain on slate"), Bricolage Grotesque display + Space Grotesk + IBM Plex Mono.

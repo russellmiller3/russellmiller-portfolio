@@ -68,7 +68,7 @@
   .eyebrow::before { content:""; width: 20px; height: 1.5px; background: var(--green); display: inline-block; }
 
   /* NAV */
-  nav { position: sticky; top: 0; z-index: 100; background: rgba(236,238,233,.84); backdrop-filter: saturate(160%) blur(14px); border-bottom: 1px solid transparent; transition: border-color .25s, box-shadow .25s; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(235,238,242,.84); backdrop-filter: saturate(160%) blur(14px); border-bottom: 1px solid transparent; transition: border-color .25s, box-shadow .25s; }
   nav.scrolled { border-bottom: 1px solid var(--line); box-shadow: 0 4px 20px rgba(16,32,25,.04); }
   .nav-inner { max-width: var(--maxw); margin: 0 auto; padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; }
   .brand { display: flex; align-items: center; gap: 11px; font-family: var(--disp); font-weight: 700; font-size: 19px; color: var(--ink); }
@@ -102,7 +102,8 @@
 
   .hero-portrait { position: relative; }
   .hero-portrait .frame { position: relative; border-radius: var(--r-md); overflow: hidden; box-shadow: var(--shadow-lg); aspect-ratio: 4/5; background: var(--bg-2); }
-  .hero-portrait .frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.55) contrast(1.03); }
+  .hero-portrait .frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05) brightness(1.01); }
+  .hero-portrait .frame::after { content:""; position:absolute; inset:0; background: linear-gradient(155deg, rgba(46,114,171,.18), rgba(30,42,56,.12)); mix-blend-mode: multiply; pointer-events:none; }
   .hero-portrait::after { content:""; position: absolute; right: -14px; bottom: -14px; width: 84px; height: 84px; background: var(--green); border-radius: 4px; z-index: -1; }
   .hero-portrait .cap { font-family: var(--mono); font-size: 11.5px; color: var(--faint); margin-top: 12px; letter-spacing: .02em; }
 
@@ -285,17 +286,17 @@
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-copy">
-        <div class="hero-badge"><span class="dot"></span> Available for AI product roles &amp; operating-partner consulting</div>
-        <h1>I build AI that moves the <em>P&amp;L.</em></h1>
-        <p class="hero-sub">AI product leader and hands-on builder. <strong>15+ years</strong> shipping production ML and agentic systems &mdash; <strong>$20M+ in attributable revenue</strong>, an $8M EBITDA contribution, and a string of double-digit conversion lifts. MIT Math.</p>
+        <div class="hero-badge"><span class="dot"></span> AI Operating Partner &amp; value-creation architect for PE/VC portfolios</div>
+        <h1>I architect AI that moves the <em>P&amp;L.</em></h1>
+        <p class="hero-sub">Operating leader and AI architect. <strong>20 years</strong> using AI/ML to transform software and data platforms and drive value creation for PE-backed and enterprise companies &mdash; <strong>$20M+ attributable revenue</strong>, an $8M EBITDA contribution. MIT Math.</p>
         <div class="hero-cta">
-          <a href="#work" class="btn btn-primary">See the work <svg data-lucide="arrow-down"></svg></a>
-          <a href="#contact" class="btn btn-ghost">Work with me <svg data-lucide="arrow-up-right"></svg></a>
+          <a href="#work" class="btn btn-primary">Selected work <svg data-lucide="arrow-down"></svg></a>
+          <a href="#contact" class="btn btn-ghost">Start a conversation <svg data-lucide="arrow-up-right"></svg></a>
         </div>
         <div class="hero-stats">
           <div class="stat"><div class="n">$20M+</div><div class="l">Attributable revenue</div></div>
-          <div class="stat"><div class="n">5</div><div class="l">Production AI products</div></div>
-          <div class="stat"><div class="n">15+</div><div class="l">Years in product &amp; ML</div></div>
+          <div class="stat"><div class="n">$8M</div><div class="l">EBITDA contribution</div></div>
+          <div class="stat"><div class="n">20yr</div><div class="l">Operating leadership</div></div>
         </div>
       </div>
       <div class="hero-portrait">
@@ -334,8 +335,8 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Selected work</span>
-      <h2>Five products I designed and shipped.</h2>
-      <p>Not slideware &mdash; production AI tools I built end-to-end: the architecture, the agent loops, the model routing, the UI. Each one solves a real problem I kept running into.</p>
+      <h2>Five systems I architected and shipped.</h2>
+      <p>Not slideware &mdash; production AI systems designed end-to-end: the model strategy, the agent architecture, the data pipeline. Proof that the roadmaps I draw get built and shipped.</p>
     </div>
     <div class="projects">
 
@@ -476,8 +477,8 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">For PE/VC &amp; portfolio companies</span>
-      <h2>AI Operating Partner, on demand.</h2>
-      <p>I deploy AI across portfolio companies to expand EBITDA, strengthen moats, and improve exit multiples &mdash; without fragile science projects or execution theater. Operator credibility, hands-on build depth, and PE ecosystem fluency in one person.</p>
+      <h2>AI Operating Partner &amp; strategist.</h2>
+      <p>I deploy AI across portfolio companies to expand EBITDA, strengthen moats, and improve exit multiples &mdash; without fragile science projects or execution theater. Operating credibility, architectural depth, and PE ecosystem fluency in one principal.</p>
     </div>
     <div class="approach-grid reveal">
       <div class="acard"><div class="ic"><svg data-lucide="trending-up"></svg></div><h3>Revenue growth</h3><p>AI-driven pricing, conversion optimization, lead scoring, and personalized recommendations tied directly to the top line.</p></div>
@@ -501,10 +502,10 @@
     <div class="about-grid">
       <div class="reveal">
         <span class="eyebrow">About</span>
-        <h2 style="font-size:clamp(28px,4vw,40px);margin:16px 0 24px">Operator and builder, in equal measure.</h2>
-        <p>I'm <strong>Russell Miller</strong> &mdash; an AI product leader who still writes the code. Over 15+ years I've led product, growth, and data science at <strong>Axial, Ryzeo, RepairPal, Texas Instruments, and Online Resources</strong>, and built ML and agentic systems from first principles.</p>
-        <p>I've been a SaaS <strong>COO with full P&amp;L ownership</strong>, an <strong>independent sponsor</strong> structuring software and SaaS deals alongside CIVC, Stonehenge, and BlackRock, and a hands-on <strong>founder shipping production LLM systems</strong>. That mix &mdash; operator, investor, engineer &mdash; is what lets me turn AI from a demo into a number on the P&amp;L.</p>
-        <p>Today I'm focused on AI product roles and operating-partner consulting where I can build and lead at the same time.</p>
+        <h2 style="font-size:clamp(28px,4vw,40px);margin:16px 0 24px">Operator, architect, investor.</h2>
+        <p>I'm <strong>Russell Miller</strong> &mdash; an AI operating leader and architect with <strong>20 years</strong> using machine learning to transform software and data platforms. I've led product, growth, and data science at <strong>Axial, Ryzeo, RepairPal, and Texas Instruments</strong>, and architected the ML and agentic systems behind them.</p>
+        <p>I've been a SaaS <strong>COO with full P&amp;L ownership</strong> through a successful exit, and a five-year <strong>independent sponsor</strong> sourcing and structuring control deals alongside <strong>CIVC, Stonehenge, and BlackRock</strong>. That rare mix &mdash; operating executive, deal principal, and hands-on AI architect &mdash; is what turns AI strategy into EBITDA.</p>
+        <p>Today I advise PE firms and portfolio CEOs on AI-driven value creation, and lead AI strategy and architecture as an operating partner.</p>
       </div>
       <div class="about-side reveal">
         <h4>Education</h4>
@@ -523,8 +524,8 @@
   <div class="wrap">
     <div class="contact-card reveal">
       <span class="eyebrow">Let's talk</span>
-      <h2>Have an AI problem worth solving?</h2>
-      <p>Whether it's a product to build or a portfolio to transform, I'd like to hear about it. The fastest way to reach me is email.</p>
+      <h2>Let's create value with AI.</h2>
+      <p>Whether it's a portfolio to transform or an AI strategy to architect, I'd like to hear about it. The fastest way to reach me is email.</p>
       <div class="contact-actions">
         <a href="mailto:rmiller@zavient.com" class="btn btn-primary"><svg data-lucide="mail"></svg> rmiller@zavient.com</a>
         <a href="https://linkedin.com/in/russellmiller" target="_blank" rel="noopener" class="btn btn-ghost"><svg class="li" viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.73v20.54C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg> Connect on LinkedIn</a>
