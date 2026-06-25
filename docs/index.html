@@ -238,6 +238,12 @@
   .contact-card h2 { font-size: clamp(30px, 4.5vw, 46px); font-weight: 800; margin: 16px 0 18px; }
   .contact-card p { font-size: 18px; color: var(--muted); max-width: 520px; margin: 0 auto 30px; }
   .contact-actions { display: flex; gap: 13px; justify-content: center; flex-wrap: wrap; position: relative; }
+  .contact-resumes { margin-top: 22px; display: flex; gap: 8px 16px; justify-content: center; align-items: center; flex-wrap: wrap; position: relative; }
+  .contact-resumes .lbl { font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+  .contact-resumes a { display: inline-flex; align-items: center; gap: 6px; color: var(--green); font-weight: 600; font-size: 14px; }
+  .contact-resumes a:hover { text-decoration: underline; }
+  .contact-resumes a svg { width: 15px; height: 15px; }
+  .contact-resumes .sep { color: var(--line); }
 
   footer { border-top: 1px solid var(--line); padding: 36px 0; }
   .foot-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
@@ -537,6 +543,12 @@
         <a href="https://calendar.app.google/eCCrpiPdkNetQuD29" target="_blank" rel="noopener" class="btn btn-primary"><svg data-lucide="calendar-clock"></svg> Book a 30-min intro</a>
         <a href="mailto:rmiller@zavient.com" class="btn btn-ghost"><svg data-lucide="mail"></svg> rmiller@zavient.com</a>
         <a href="https://linkedin.com/in/russellmiller" target="_blank" rel="noopener" class="btn btn-ghost"><svg class="li" viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.73v20.54C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg> Connect on LinkedIn</a>
+      </div>
+      <div class="contact-resumes">
+        <span class="lbl">Résumé</span>
+        <a href="assets/russell-miller-ai-product.pdf" download><svg data-lucide="download"></svg> AI Product</a>
+        <span class="sep">&middot;</span>
+        <a href="assets/russell-miller-pe-operating-partner.pdf" download><svg data-lucide="download"></svg> PE Operating Partner</a>
       </div>
     </div>
   </div>
