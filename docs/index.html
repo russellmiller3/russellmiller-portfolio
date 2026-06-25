@@ -183,6 +183,16 @@
   .fb-fact .badge { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: #7DE8F0; background: rgba(125,232,240,.12); padding: 3px 8px; border-radius: 4px; height: fit-content; }
   .fb-fact p { font-size: 12.5px; color: rgba(255,255,255,.86); line-height: 1.5; }
   .fb-fact .src { font-family: var(--mono); font-size: 10.5px; color: rgba(255,255,255,.45); margin-top: 3px; }
+  .panel-disc { background: linear-gradient(150deg, #20303F 0%, #2A3F52 60%, #324A60 100%); }
+  .disc-card { width: 100%; max-width: 380px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 12px; padding: 14px 16px; font-family: var(--mono); }
+  .disc-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.07); font-size: 12px; color: rgba(255,255,255,.84); }
+  .disc-row:last-child { border-bottom: none; }
+  .disc-row > svg { width: 15px; height: 15px; flex-shrink: 0; }
+  .disc-row .ok { color: #6EE7A8; } .disc-row .blk { color: #FF8A8A; }
+  .disc-row .lbl2 { flex: 1; min-width: 0; }
+  .disc-row .chip2 { font-size: 9px; letter-spacing: .06em; padding: 2px 7px; border-radius: 4px; flex-shrink: 0; }
+  .disc-row .chip2.e { color: #8FE0B4; background: rgba(110,231,168,.13); }
+  .disc-row .chip2.b { color: #FFB0B0; background: rgba(255,138,138,.13); }
 
   /* IMPACT */
   .impact { background: var(--dark); color: #E7EFE9; border-radius: var(--r-lg); padding: 60px 54px; box-shadow: var(--shadow-lg); position: relative; overflow: hidden; }
@@ -348,7 +358,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Selected work</span>
-      <h2>Five systems I architected and shipped.</h2>
+      <h2>Six systems I architected and shipped.</h2>
       <p>Not slideware &mdash; production AI systems designed end-to-end: the model strategy, the agent architecture, the data pipeline. Proof that the roadmaps I draw get built and shipped.</p>
     </div>
     <div class="projects">
@@ -461,6 +471,33 @@
             <li><svg data-lucide="check"></svg> Chrome extension and MCP server feed grounded, cited context into your AI tools.</li>
           </ul>
           <div class="chips"><span class="chip">Node.js</span><span class="chip">PGLite</span><span class="chip">pgvector</span><span class="chip">transformers.js</span><span class="chip">BM25</span><span class="chip">Chrome ext</span><span class="chip">MCP</span></div>
+        </div>
+      </article>
+
+      <article class="pcard reveal">
+        <div class="pcard-media">
+          <div class="panel panel-disc">
+            <div class="disc-card">
+              <div class="disc-row"><svg data-lucide="check" class="ok"></svg><span class="lbl2">Test-first before code</span><span class="chip2 e">ENFORCED</span></div>
+              <div class="disc-row"><svg data-lucide="x" class="blk"></svg><span class="lbl2">Commit without logging the lesson</span><span class="chip2 b">BLOCKED</span></div>
+              <div class="disc-row"><svg data-lucide="check" class="ok"></svg><span class="lbl2">Root-cause before patch</span><span class="chip2 e">ENFORCED</span></div>
+              <div class="disc-row"><svg data-lucide="rotate-cw" class="ok"></svg><span class="lbl2">Lesson injected into next session</span><span class="chip2 e">AUTO</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-kicker">
+            <div class="pcard-ic" style="background:var(--green)"><svg data-lucide="list-checks"></svg></div>
+            <div><h3>Claude Discipline</h3><div class="tag">Governance &amp; reliability for AI agents</div></div>
+          </div>
+          <p class="desc">An operating system for AI coding agents: deterministic guardrails that block the wrong move <em>before</em> it lands, plus a memory layer that forces lessons to be written down so the same mistake can't recur. Turns advice the agent ignores into rules it can't skip.</p>
+          <ul>
+            <li><svg data-lucide="check"></svg> Guardrails enforce engineering judgment &mdash; TDD-first, root-cause, no silent fallbacks &mdash; deterministically, not the ~80% compliance of written advice.</li>
+            <li><svg data-lucide="check"></svg> A compounding memory loop: every real mistake forces a logged lesson, auto-injected next session, so it can't happen twice.</li>
+            <li><svg data-lucide="check"></svg> Session continuity lets a fresh &mdash; or cheaper &mdash; agent resume without re-deriving state.</li>
+          </ul>
+          <div class="chips"><span class="chip">Node.js</span><span class="chip">Claude Code hooks</span><span class="chip">Zero-dep .mjs</span><span class="chip">Open source</span></div>
+          <a class="pcard-link" href="https://github.com/russellmiller3/claude-discipline" target="_blank" rel="noopener">View on GitHub <svg data-lucide="arrow-up-right"></svg></a>
         </div>
       </article>
 
