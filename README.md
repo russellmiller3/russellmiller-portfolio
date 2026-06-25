@@ -15,27 +15,54 @@ Open `index.html` directly, or serve the folder:
 npx serve .
 ```
 
-## Publish to GitHub Pages
+## Go live at russellmiller.io (GitHub Pages + Porkbun)
 
-### Fastest (web upload, no git)
-1. Create a new repo on GitHub named **`<your-username>.github.io`** (public).
-2. On the repo page, click **Add file → Upload files**, drag in `index.html`, the `assets/` folder, and `.nojekyll`, then **Commit**.
-3. Site goes live at `https://<your-username>.github.io` in ~1 minute.
+The repo already contains a `CNAME` file (`russellmiller.io`) and `.nojekyll`, so the domain
+re-applies automatically on every deploy. Three stages: push → enable Pages → point DNS.
 
-### With git CLI
+### 1. Push to GitHub
+Create a repo (any name, e.g. `russellmiller-portfolio` — the custom domain makes the repo name
+irrelevant). Then, from this folder:
 ```
-cd personal-site
-git init
-git add .
-git commit -m "Portfolio site"
-git branch -M main
-git remote add origin https://github.com/<your-username>/<your-username>.github.io.git
+git remote add origin https://github.com/<your-username>/<repo>.git
 git push -u origin main
 ```
-Then in the repo: **Settings → Pages → Source: Deploy from a branch → main / root**.
+(Repo already initialized and committed locally.)
 
-## Custom domain (optional)
-Add a file named `CNAME` containing your domain (e.g. `russellmiller.ai`), then point a CNAME/ALIAS DNS record at GitHub Pages.
+### 2. Enable Pages
+Repo **Settings → Pages**:
+- **Source:** Deploy from a branch → **`main`** / **`/ (root)`** → Save.
+- **Custom domain:** it should already show `russellmiller.io` (from the `CNAME` file). If not, type it and Save.
+- Wait for the DNS check, then tick **Enforce HTTPS** (may take a few minutes to become available).
+
+### 3. Point Porkbun DNS at GitHub
+Porkbun dashboard → **russellmiller.io → Details → DNS Records**. Delete Porkbun's default
+parking A/ALIAS records, then add these.
+
+**Apex (`russellmiller.io`) — four A records.** Type `A`, Host blank (or `@`), TTL 600:
+```
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+```
+**Apex IPv6 (recommended) — four AAAA records.** Type `AAAA`, Host blank, TTL 600:
+```
+2606:50c0:8000::153
+2606:50c0:8001::153
+2606:50c0:8002::153
+2606:50c0:8003::153
+```
+**www → GitHub.** Type `CNAME`, Host `www`, Answer `<your-username>.github.io` (with trailing dot if required), TTL 600.
+
+> Porkbun also offers an `ALIAS` record that can flatten the apex to `<your-username>.github.io` —
+> either works, but the A + AAAA set above is GitHub's documented, most reliable path. Use one or the other, not both.
+
+DNS propagates in ~5–30 min (up to a few hours). Verify with `dig russellmiller.io +short`
+(should return the four GitHub IPs), then load `https://russellmiller.io`.
+
+### Quick local test path
+Open `index.html` directly, or `npx serve .` and visit the printed URL.
 
 ## Editing content
 Everything lives in `index.html`:
