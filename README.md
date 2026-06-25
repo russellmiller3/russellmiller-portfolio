@@ -3,7 +3,7 @@
 Single-page portfolio for AI product roles and operating-partner consulting.
 Static site — `index.html` + `assets/`. No build step.
 
-**Design:** forest-green on cool off-white, Bricolage Grotesque display + Space Grotesk + IBM Plex Mono.
+**Design:** sky-blue + slate-gray on light gray ("sky and rain on slate"), Bricolage Grotesque display + Space Grotesk + IBM Plex Mono.
 The hero band has an animated LLM app pipeline (prompt → retrieval → agent → tools → output) where a
 sparse subset of nodes activates and propagates forward each cycle. Background is a subtle bloom +
 film-grain layer (`.bg-deep` / `.bg-grain`) with a light scroll parallax. No external deps beyond Google
