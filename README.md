@@ -3,6 +3,9 @@
 Single-page portfolio positioning Russell Miller as an AI operating partner, architect, and value-creation strategist for PE/VC portfolios.
 Static site. No build step.
 
+> **Secrets:** never commit API keys. `.env` / `*.env` are gitignored; Porkbun/host credentials
+> stay out of the repo. If a key is ever exposed, rotate it at the provider.
+
 ## Repo layout
 - **`docs/`** — the live site (`index.html` + `assets/` + `CNAME` + `.nojekyll`). GitHub Pages serves from here.
 - **`designs/`** — scratch design explorations (`design-options*.html`), kept for reference, not published.
