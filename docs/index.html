@@ -615,7 +615,7 @@
 
     let li = 0, prevSet = null;
     function tick(){
-      if (li >= nodes.length){ clearLayer(nodes.length-1); li = 0; prevSet = null; setTimeout(tick, 520); return; }
+      if (li >= nodes.length){ nodes.forEach((_, i) => clearLayer(i)); li = 0; prevSet = null; setTimeout(tick, 520); return; }
       clearLayer(li - 2);                              // fade the layer two steps back
       const set = subset(nodes[li].length);            // only SOME nodes fire
       nodes[li].forEach((c,i) => c.classList.toggle('on', set.has(i)));

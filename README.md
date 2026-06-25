@@ -1,7 +1,15 @@
 # Russell Miller — Portfolio
 
 Single-page portfolio positioning Russell Miller as an AI operating partner, architect, and value-creation strategist for PE/VC portfolios.
-Static site — `index.html` + `assets/`. No build step.
+Static site. No build step.
+
+## Repo layout
+- **`docs/`** — the live site (`index.html` + `assets/` + `CNAME` + `.nojekyll`). GitHub Pages serves from here.
+- **`designs/`** — scratch design explorations (`design-options*.html`), kept for reference, not published.
+- **`README.md`** — this file.
+
+`docs/` is used (not the repo root) because GitHub Pages' branch deploy only serves from the root or a `/docs`
+folder — keeping the site in `docs/` lets the explorations live alongside it without being published.
 
 **Design:** sky-blue + slate-gray on light gray ("sky and rain on slate"), Bricolage Grotesque display + Space Grotesk + IBM Plex Mono.
 The hero band has an animated LLM app pipeline (prompt → retrieval → agent → tools → output) where a
@@ -10,9 +18,9 @@ film-grain layer (`.bg-deep` / `.bg-grain`) with a light scroll parallax. No ext
 Fonts and the Lucide icon CDN. Scratch design explorations live in `design-options*.html` (not part of the site).
 
 ## Preview locally
-Open `index.html` directly, or serve the folder:
+Open `docs/index.html` directly, or serve that folder:
 ```
-npx serve .
+npx serve docs
 ```
 
 ## Go live at russellmiller.io (GitHub Pages + Porkbun)
@@ -31,7 +39,7 @@ git push -u origin main
 
 ### 2. Enable Pages
 Repo **Settings → Pages**:
-- **Source:** Deploy from a branch → **`main`** / **`/ (root)`** → Save.
+- **Source:** Deploy from a branch → **`main`** / **`/docs`** → Save.
 - **Custom domain:** it should already show `russellmiller.io` (from the `CNAME` file). If not, type it and Save.
 - Wait for the DNS check, then tick **Enforce HTTPS** (may take a few minutes to become available).
 
@@ -62,7 +70,7 @@ DNS propagates in ~5–30 min (up to a few hours). Verify with `dig russellmille
 (should return the four GitHub IPs), then load `https://russellmiller.io`.
 
 ### Quick local test path
-Open `index.html` directly, or `npx serve .` and visit the printed URL.
+Open `docs/index.html` directly, or `npx serve docs` and visit the printed URL.
 
 ## Editing content
 Everything lives in `index.html`:
