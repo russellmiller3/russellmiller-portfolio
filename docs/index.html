@@ -118,7 +118,7 @@
   .llm-node { fill: var(--green-soft); stroke: var(--green); stroke-width: 1.1; opacity: .38; transform-box: fill-box; transform-origin: center; transition: fill .28s ease, opacity .28s ease, transform .28s ease; }
   .llm-node.on { fill: var(--green); opacity: 1; transform: scale(1.32); }
   .llm-edge { fill: none; stroke: var(--green); stroke-width: 1; stroke-opacity: .08; transition: stroke-opacity .25s ease; }
-  .llm-edge.live { stroke-opacity: .55; stroke-dasharray: 3 6; animation: edgeFlow .45s linear infinite; }
+  .llm-edge.live { stroke-opacity: .55; stroke-dasharray: 3 6; animation: edgeFlow .65s linear infinite; }
   .llm-label { font-family: var(--mono); font-size: 10px; fill: var(--faint); letter-spacing: .04em; text-transform: uppercase; }
   @keyframes edgeFlow { to { stroke-dashoffset: -18; } }
 
@@ -615,7 +615,7 @@
 
     let li = 0, prevSet = null;
     function tick(){
-      if (li >= nodes.length){ nodes.forEach((_, i) => clearLayer(i)); li = 0; prevSet = null; setTimeout(tick, 520); return; }
+      if (li >= nodes.length){ nodes.forEach((_, i) => clearLayer(i)); li = 0; prevSet = null; setTimeout(tick, 760); return; }
       clearLayer(li - 2);                              // fade the layer two steps back
       const set = subset(nodes[li].length);            // only SOME nodes fire
       nodes[li].forEach((c,i) => c.classList.toggle('on', set.has(i)));
@@ -623,9 +623,9 @@
         edges.forEach(e => { if (e.l === li-1) e.line.classList.toggle('live', prevSet.has(e.a) && set.has(e.b)); });
       }
       prevSet = set; li++;
-      setTimeout(tick, 440);
+      setTimeout(tick, 620);
     }
-    setTimeout(tick, 350);
+    setTimeout(tick, 500);
   })();
 
   const navEl = document.getElementById('nav');
