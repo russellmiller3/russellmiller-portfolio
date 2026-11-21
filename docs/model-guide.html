@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Which Claude Model and Effort?</title>
+<meta name="description" content="Four Claude models, five effort levels, drawn as a comic. Pick your kind of work and see which to use. By Russell Miller.">
+<meta property="og:title" content="Which Claude model, and how hard should it think?">
+<meta property="og:description" content="Four models, five effort levels, drawn as a comic. Pick your work and see which to use.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://russellmiller.io/model-guide.html">
+<link rel="canonical" href="https://russellmiller.io/model-guide.html">
+<meta name="twitter:card" content="summary">
+<!--
+  Model and effort guide by Russell Miller, version 2: a comic in five parts (models, effort, pick, fix, cost).
+  Facts: Anthropic's docs, read 21 November 2026. To update: change MODELS, EFFORTS and WORK in the script.
+  Text sizes: reading text 15px or more, small labels 13px or more. Light theme only. System fonts only.
+-->
+<style>
+  /* Layout: a lavender title band, then numbered parts stacked top to bottom. Each part has a red label,
+     one sentence as its title, and a row of simple drawn scenes. Part 1 the four workers (models),
+     part 2 the five checklists (effort), part 3 pick your work, part 4 fix a wrong answer, part 5 cost.
+     One accent only: brick red marks the active thing. */
+  :root{
+    --ground:#F7F8FC; --band:#E7EAF6; --fill:#DDE2F2; --ink:#111111; --muted:#5F6272; --faint:#B9BED0;
+    --red:#C42A1C; --paper:#FFFFFF;
+    --serif:Georgia,"Times New Roman",serif;
+    --sans:Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{color-scheme:light}
+  body{font-family:var(--sans);font-size:16px;line-height:1.45;background:var(--ground);color:var(--ink);
+    -webkit-font-smoothing:antialiased}
+  button,input,textarea{font-family:inherit;color:inherit}
+  button{cursor:pointer}
+  :focus-visible{outline:3px solid var(--red);outline-offset:2px}
+  a{color:var(--ink);text-underline-offset:3px}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .inner{max-width:960px;margin:0 auto;
+    padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+  /* title band */
+  .hero{background:var(--band);border-bottom:1.5px solid var(--ink)}
+  .hero .inner{padding-block:22px 30px;display:flex;flex-direction:column;gap:14px}
+  .by{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;font-size:15px}
+  .by b{font-weight:700}
+  h1{font-family:var(--serif);font-weight:400;font-size:44px;line-height:1.1;text-wrap:balance}
+  .sub{font-size:19px;color:var(--muted)}
+
+  /* parts */
+  .part{padding-block:34px 6px}
+  .part .inner{display:flex;flex-direction:column;gap:16px}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+  h2{font-family:var(--serif);font-weight:400;font-size:31px;line-height:1.15;text-wrap:balance;margin-top:-8px}
+  .foot{font-size:15px;color:var(--muted)}
+
+  /* scenes */
+  .row{display:grid;gap:12px}
+  .row.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .row.five{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .scene{background:var(--paper);border:1.5px solid var(--ink);border-radius:4px;padding:14px;
+    display:flex;flex-direction:column;gap:6px;min-width:0;text-align:left}
+  .scene svg{display:block}
+  .pic{display:flex;justify-content:center;align-items:flex-end;height:118px;margin-bottom:4px}
+  .pic.short{height:92px}
+  .tag{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
+  .st{font-family:var(--serif);font-size:20px;line-height:1.2}
+  .cap{font-size:15px;color:var(--muted);line-height:1.35}
+  .price{font-size:15px;font-weight:700;margin-top:auto;padding-top:6px}
+
+  /* part 3: pick */
+  .mcards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+  .mcard{background:var(--paper);border:1.5px solid var(--ink);border-radius:4px;padding:14px;
+    display:flex;flex-direction:column;min-width:0}
+  .mhead{display:flex;align-items:center;gap:12px;padding-bottom:10px}
+  .mnames{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .hint{font-size:17px;font-weight:700}
+  .job{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:10px;width:100%;
+    background:var(--paper);border:1.5px solid var(--faint);padding:8px 10px;font-size:16px;
+    text-align:left;border-radius:4px;min-height:46px;margin-top:7px}
+  .job:hover{border-color:var(--ink);background:var(--band)}
+  .job[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+  .job .jn{min-width:0}
+  .job .jv{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;color:var(--red)}
+  .job[aria-pressed="true"] .jv{color:#fff}
+  .job .go{font-size:13px;font-weight:700;white-space:nowrap;border:1.5px solid currentColor;border-radius:999px;padding:3px 10px}
+
+  /* part 4: example asks. Pinned to the bottom of the screen while the cards are in view. */
+  .cardsin{padding-block:16px 22px}
+  .exband{position:sticky;bottom:0;z-index:5;background:var(--band);border-top:1.5px solid var(--ink);
+    border-bottom:1.5px solid var(--ink);box-shadow:0 -8px 18px rgba(17,17,17,.10)}
+  .exband .inner{display:flex;flex-direction:column;gap:10px;padding-block:12px 14px}
+  .exhead{display:flex;align-items:center;gap:12px}
+  .exnames{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .extitle{font-family:var(--serif);font-size:22px;line-height:1.2;min-width:0}
+  .extitle b{font-weight:400;color:var(--red);white-space:nowrap}
+  .row.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .exband .scene{padding:10px 12px;gap:3px}
+  .quote{font-family:var(--serif);font-size:18px;line-height:1.3}
+  @keyframes flash{from{background:#F6C9C3}to{background:var(--band)}}
+  @keyframes flashcard{from{border-color:var(--red);box-shadow:0 0 0 3px var(--red)}to{border-color:var(--ink);box-shadow:0 0 0 0 transparent}}
+  .exband.flash{animation:flash 1.1s ease-out}
+  .exband.flash .scene{animation:flashcard 1.1s ease-out}
+  @media (prefers-reduced-motion:reduce){ .exband.flash,.exband.flash .scene{animation:none} }
+
+  /* part 4: fix */
+  .fix{cursor:pointer}
+  .fix:hover{background:var(--band)}
+  .now{font-family:var(--serif);font-size:22px;min-height:1.4em}
+  .now b{font-weight:400;color:var(--red);white-space:nowrap}
+  .moved{font-size:16px;font-weight:700;min-height:1.5em}
+
+  /* part 5: cost */
+  .slide{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;font-size:16px}
+  .slide label{font-weight:700}
+  .slide input[type=range]{flex:1 1 220px;min-width:0;accent-color:var(--red);height:32px}
+  .slide output{font-family:var(--serif);font-size:22px;min-width:3.2em}
+  .costs{display:flex;flex-direction:column;gap:8px}
+  .crow{display:grid;grid-template-columns:104px minmax(0,1fr) 132px;gap:12px;align-items:center;font-size:15px}
+  .cn{font-weight:700}
+  .cbar{height:20px;background:var(--band);border:1px solid var(--faint);border-radius:3px;overflow:hidden}
+  .cfill{display:block;height:100%;background:var(--ink)}
+  .crow.on .cfill{background:var(--red)}
+  .cval{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+
+  /* take it with you */
+  .snip{width:100%;min-height:260px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;line-height:1.5;
+    padding:10px 12px;border:1.5px solid var(--ink);border-radius:4px;background:var(--paper);resize:vertical}
+  .btnrow{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .btn{border:1.5px solid var(--ink);background:var(--ink);color:#fff;font-size:15px;font-weight:700;
+    padding:10px 18px;border-radius:4px;min-height:44px}
+  .btn:hover{background:var(--red);border-color:var(--red)}
+  .copied{font-size:15px;font-weight:700;min-height:1.5em}
+
+  /* contact */
+  .me{background:var(--band);border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);margin-top:34px}
+  .me .inner{padding-block:30px;display:flex;flex-direction:column;gap:14px}
+  .me h2{margin-top:0}
+  .me p{font-size:17px}
+  .proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .proof div{background:var(--paper);border:1.5px solid var(--ink);border-radius:4px;padding:12px;font-size:15px;color:var(--muted)}
+  .proof b{display:block;font-family:var(--serif);font-weight:400;font-size:26px;color:var(--red)}
+  .links{display:flex;flex-wrap:wrap;gap:10px}
+  .links a{background:var(--ink);color:#fff;text-decoration:none;font-weight:700;font-size:15px;
+    padding:11px 16px;border-radius:4px;min-height:44px;display:inline-flex;align-items:center}
+  .links a:hover{background:var(--red)}
+  .src{padding-block:18px 40px}
+  .src p{font-size:15px;color:var(--muted)}
+  .src a{color:var(--muted);white-space:nowrap}
+
+  @media (max-width:760px){
+    h1{font-size:32px}
+    h2{font-size:25px}
+    .row.four,.row.five{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .mcards{grid-template-columns:1fr}
+    .row.three{grid-template-columns:1fr;gap:6px}
+    .exband .inner{gap:8px;padding-block:8px 10px}
+    .exband .scene{padding:6px 10px}
+    .exband .scene .tag{display:none}
+    .extitle{font-size:17px}
+    .quote{font-size:16px}
+    .job{grid-template-columns:minmax(0,1fr) auto}
+    .job .go{grid-column:1 / -1;justify-self:start}
+    .crow{grid-template-columns:84px minmax(0,1fr) 104px;gap:8px}
+    .proof{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- the cast: one drawing per worker, reused in every scene -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="person" viewBox="0 0 120 120">
+      <path d="M30 114V88a30 30 0 0 1 60 0v26z" fill="#DDE2F2" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+      <circle cx="60" cy="40" r="18" fill="#fff" stroke="#111" stroke-width="2.5"/>
+      <circle cx="53" cy="38" r="2.3" fill="#111"/><circle cx="67" cy="38" r="2.3" fill="#111"/>
+      <path d="M52 46q8 7 16 0" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="w-haiku" viewBox="0 0 120 120">
+      <use href="#person"/>
+      <path d="M4 72h18M9 86h15M2 100h18" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+      <rect x="84" y="82" width="30" height="20" fill="#fff" stroke="#C42A1C" stroke-width="2.5"/>
+      <path d="M84 82l15 11 15-11" fill="none" stroke="#C42A1C" stroke-width="2.5"/>
+    </symbol>
+    <symbol id="w-sonnet" viewBox="0 0 120 120">
+      <use href="#person"/>
+      <rect x="84" y="70" width="28" height="36" fill="#fff" stroke="#111" stroke-width="2.5"/>
+      <rect x="92" y="65" width="12" height="8" fill="#C42A1C"/>
+      <path d="M90 84h16M90 92h16M90 100h10" stroke="#111" stroke-width="2"/>
+    </symbol>
+    <symbol id="w-opus" viewBox="0 0 120 120">
+      <use href="#person"/>
+      <path d="M41 32a19 19 0 0 1 38 0z" fill="#C42A1C" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M35 32h50" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+      <rect x="82" y="86" width="34" height="14" rx="7" fill="#fff" stroke="#111" stroke-width="2.5"/>
+      <path d="M91 86v14" stroke="#111" stroke-width="2"/>
+    </symbol>
+    <symbol id="w-fable" viewBox="0 0 120 120">
+      <use href="#person"/>
+      <circle cx="95" cy="78" r="13" fill="#fff" stroke="#C42A1C" stroke-width="4"/>
+      <path d="M104 88l11 13" stroke="#C42A1C" stroke-width="5" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<h2 class="sr-only">A comic guide to choosing a Claude model and effort level. Part 1 shows the four models as four workers.
+Part 2 shows the five effort levels as checklists. Part 3 lists the best jobs for each model, with the effort to use. Part 4 shows example asks for the job you press.
+Part 5 shows which setting to change when an answer is wrong. Part 6 shows the cost.</h2>
+
+<header class="hero">
+  <div class="inner">
+    <div class="by"><span><b>Russell Miller</b> · AI product and GTM</span><a href="https://russellmiller.io">russellmiller.io</a></div>
+    <h1>Which Claude model, and how hard should it think?</h1>
+    <p class="sub">Two settings. Six short parts. Start at the top.</p>
+  </div>
+</header>
+
+<section class="part" aria-label="Part 1, the models">
+  <div class="inner">
+    <div class="eyebrow">Part 1 · The model</div>
+    <h2>The model is who you hire.</h2>
+    <div class="row four" id="cast"></div>
+    <p class="foot">Price is per million output tokens. Not sure? Hire Opus.</p>
+  </div>
+</section>
+
+<section class="part" aria-label="Part 2, the effort">
+  <div class="inner">
+    <div class="eyebrow">Part 2 · The effort</div>
+    <h2>The effort is how carefully they check.</h2>
+    <div class="row five" id="levels"></div>
+    <p class="foot">More checks cost more. Not sure? Leave it on medium.</p>
+  </div>
+</section>
+
+<section class="part" aria-label="Part 3, pick your work">
+  <div class="inner">
+    <div class="eyebrow">Part 3 · The jobs</div>
+    <h2>Each model has its jobs.</h2>
+    <p class="hint">Press any job. Its example asks show in part 4, just below.</p>
+  </div>
+</section>
+
+<!-- Part 4 stays pinned to the bottom of the screen while the job cards are in view. A press never scrolls the page. -->
+<div class="jobswrap">
+  <div class="inner cardsin"><div class="mcards" id="mcards"></div></div>
+  <section class="exband" id="examples" aria-label="Part 4, example asks">
+    <div class="inner">
+      <div class="exhead"><span id="expic"></span>
+        <div class="exnames"><div class="eyebrow">Part 4 · Example asks</div><div class="extitle" id="extitle" aria-live="polite"></div></div>
+      </div>
+      <div class="row three" id="exrow"></div>
+    </div>
+  </section>
+</div>
+
+<section class="part" aria-label="Part 5, fix a wrong answer">
+  <div class="inner">
+    <div class="eyebrow">Part 5 · When it's wrong</div>
+    <h2>Wrong answer? Change one setting.</h2>
+    <p class="hint">Press what happened.</p>
+    <div class="now" id="now" aria-live="polite"></div>
+    <div class="row five">
+      <button class="scene fix" id="fix-shallow" type="button">
+        <span class="pic short"><svg width="72" height="84" viewBox="0 0 64 76" aria-hidden="true">
+          <rect x="2" y="2" width="60" height="72" fill="#fff" stroke="#111" stroke-width="2.5"/>
+          <path d="M12 16h40" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+          <path d="M12 30h40M12 44h40M12 58h40" stroke="#B9BED0" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 7"/>
+          <path d="M32 24v34M22 48l10 11 10-11" fill="none" stroke="#C42A1C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="st">The analysis is shallow.</span><span class="tag">Bigger model</span>
+      </button>
+      <button class="scene fix" id="fix-effort" type="button">
+        <span class="pic short"><svg width="72" height="84" viewBox="0 0 64 76" aria-hidden="true">
+          <rect x="2" y="2" width="60" height="72" fill="#fff" stroke="#111" stroke-width="2.5"/>
+          <path d="M12 18l4 4 7-8M12 36l4 4 7-8" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="11" y="49" width="12" height="12" fill="none" stroke="#C42A1C" stroke-width="3"/>
+          <path d="M30 19h22M30 37h22M30 55h22" stroke="#B9BED0" stroke-width="3" stroke-linecap="round"/></svg></span>
+        <span class="st">It skipped a check.</span><span class="tag">More effort</span>
+      </button>
+      <button class="scene fix" id="fix-model" type="button">
+        <span class="pic short"><svg width="72" height="84" viewBox="0 0 64 76" aria-hidden="true">
+          <rect x="2" y="2" width="60" height="72" fill="#fff" stroke="#111" stroke-width="2.5"/>
+          <path d="M12 18l4 4 7-8M12 36l4 4 7-8M12 54l4 4 7-8" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M34 24l22 28M56 24L34 52" stroke="#C42A1C" stroke-width="5" stroke-linecap="round"/></svg></span>
+        <span class="st">It checked, and was still wrong.</span><span class="tag">Bigger model</span>
+      </button>
+      <button class="scene fix" id="fix-down" type="button">
+        <span class="pic short"><svg width="84" height="84" viewBox="0 0 76 76" aria-hidden="true">
+          <rect x="22" y="2" width="44" height="54" fill="#fff" stroke="#B9BED0" stroke-width="2.5"/>
+          <rect x="14" y="10" width="44" height="54" fill="#fff" stroke="#5F6272" stroke-width="2.5"/>
+          <rect x="6" y="18" width="44" height="54" fill="#fff" stroke="#111" stroke-width="2.5"/>
+          <path d="M14 34h28M14 46h28M14 58h18" stroke="#B9BED0" stroke-width="3" stroke-linecap="round"/></svg></span>
+        <span class="st">The work got routine.</span><span class="tag">Smaller model</span>
+      </button>
+      <button class="scene fix" id="fix-brief" type="button">
+        <span class="pic short"><svg width="84" height="84" viewBox="0 0 76 76" aria-hidden="true">
+          <path d="M12 64l5-17 34-34 12 12-34 34z" fill="#fff" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M44 20l12 12" stroke="#111" stroke-width="2.5"/>
+          <path d="M12 64l5-17 12 12z" fill="#C42A1C" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/></svg></span>
+        <span class="st">My instructions were vague.</span><span class="tag">Rewrite them</span>
+      </button>
+    </div>
+    <div class="moved" id="moved" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="part" aria-label="Part 6, the cost">
+  <div class="inner">
+    <div class="eyebrow">Part 6 · The cost</div>
+    <h2>The top model costs 80 times the bottom one.</h2>
+    <div class="slide">
+      <label for="jobs">Jobs per day</label>
+      <input id="jobs" type="range" min="1" max="500" step="1" value="50">
+      <output id="jobsout" for="jobs">50</output>
+    </div>
+    <div class="costs" id="costs"></div>
+    <p class="foot">Example job: 20,000 tokens in, 4,000 out. List prices.</p>
+  </div>
+</section>
+
+<section class="part" aria-label="Take it with you">
+  <div class="inner">
+    <div class="eyebrow">Take it with you</div>
+    <h2>Copy this skill into Claude Code.</h2>
+    <textarea class="snip" id="snip" readonly aria-label="Skill text to copy"></textarea>
+    <div class="btnrow">
+      <button class="btn" id="copy" type="button">Copy the skill</button>
+      <span class="copied" id="copied" aria-live="polite"></span>
+    </div>
+    <p class="foot">Save it as .claude/skills/model-advisor/SKILL.md. It names model families, not versions, so it stays current.</p>
+  </div>
+</section>
+
+<section class="me" aria-label="Contact">
+  <div class="inner">
+    <div class="eyebrow">Who made this</div>
+    <h2>Russell Miller. Available for AI product and GTM work, for a select few clients.</h2>
+    <p>Six AI systems I designed and built:</p>
+    <div class="proof">
+      <div><b>Cast</b>Plain-English models with a proof engine</div>
+      <div><b>Skaffen</b>A voice agent for the browser</div>
+      <div><b>Enact</b>A firewall for AI agents</div>
+      <div><b>Baryo</b>An AI workspace for inbox and deals</div>
+      <div><b>FileBrain</b>A local memory layer for your AI</div>
+      <div><b>Claude Discipline</b>Guardrails for AI coding agents</div>
+    </div>
+    <p class="foot">Earlier results: $20M+ revenue at SCUF Gaming, +18% CTR at Axial, 5x CTR at RepairPal. MIT math.</p>
+    <div class="links">
+      <a href="mailto:rmiller@zavient.com">rmiller@zavient.com</a>
+      <a href="https://linkedin.com/in/russellmiller">linkedin.com/in/russellmiller</a>
+      <a href="https://russellmiller.io">russellmiller.io</a>
+    </div>
+  </div>
+</section>
+
+<footer class="src">
+  <div class="inner">
+    <p>Prices and effort advice: Anthropic, read 21 November 2026
+    (<a href="https://platform.claude.com/docs/en/about-claude/models/overview">models</a>,
+    <a href="https://platform.claude.com/docs/en/about-claude/pricing">pricing</a>,
+    <a href="https://platform.claude.com/docs/en/build-with-claude/effort">effort</a>,
+    <a href="https://code.claude.com/docs/en/model-config">Claude Code</a>).
+    Matching work to a model is my own reading. Systems and results are from russellmiller.io.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---- facts (Anthropic, read 21 Nov 2026). inp/out = dollars per million tokens ----
+  var MODELS = [
+    {id:'haiku',  name:'Haiku 5.5',  title:'Haiku runs the errands.',         cap:'Sorting, searching, lookups.',          inp:0.10, out:0.50, mult:'1x'},
+    {id:'sonnet', name:'Sonnet 5.5', title:'Sonnet does the everyday work.',  cap:'Emails, small edits, clear tasks.',     inp:2,    out:10,   mult:'20x'},
+    {id:'opus',   name:'Opus 5.5',   title:'Opus builds the big things.',     cap:'Coding, research, analysis.',           inp:4,    out:20,   mult:'40x'},
+    {id:'fable',  name:'Fable 5.2',  title:'Fable cracks the hard puzzles.',  cap:'Strategy and open questions.',          inp:8,    out:40,   mult:'80x'}
+  ];
+  var EFFORTS = [
+    {name:'low',    title:'Low is a quick look.',          cap:'You check the result.'},
+    {name:'medium', title:'Medium is normal care.',        cap:'Claude Code starts here.'},
+    {name:'high',   title:'High checks the edge cases.',   cap:'For bugs and numbers.'},
+    {name:'xhigh',  title:'Xhigh is a long, deep run.',    cap:'For hours of work alone.'},
+    {name:'max',    title:'Max has no limit.',             cap:'It tends to overthink.'}
+  ];
+  // Each model's best jobs, lowest effort first. e = index into EFFORTS. ex = three typical asks.
+  var WORK = [
+    {give:'Give Haiku the errands.', jobs:[
+      {label:'Sorting and labelling',          e:0, ex:['Sort these 1,000 emails into 5 labels.', 'Tag each support ticket: billing, bug or other.', 'Mark each review positive, negative or mixed.']},
+      {label:'Pulling facts from documents',   e:0, ex:['Pull the date and total from each invoice.', 'List every name and email in these notes.', 'Get the renewal date from each contract.']},
+      {label:'Searching files, running tests', e:0, ex:['Find every file with the old name.', 'Run the tests and list what failed.', 'Which pages mention the 2024 pricing?']}]},
+    {give:'Give Sonnet the everyday work.', jobs:[
+      {label:'Quick questions',             e:0, ex:['How many pages is 16,000 tokens?', 'What does this error message mean?', 'Which of these two formulas is right?']},
+      {label:'Tiny exact edits',            e:0, ex:['Remove this unused setting.', 'Rename this button to Save draft.', 'Change the date format to day first.']},
+      {label:'Writing from a saved format', e:1, ex:['The same intro email, with a new name.', 'This week\'s status note, same layout.', 'A product blurb in our usual template.']}]},
+    {give:'Give Opus the big builds.', jobs:[
+      {label:'A feature with a clear scope', e:1, ex:['Add an admin button that runs the tests.', 'Add a CSV export to the orders page.', 'Let users reset their own password.']},
+      {label:'Writing something new',        e:1, ex:['A first pitch email to a new reader.', 'A one-page brief for the board.', 'Launch notes for a feature nobody has seen.']},
+      {label:'A bug in live code',           e:2, ex:['The sign-up form times out in production.', 'Totals are off by a cent on some orders.', 'The page breaks only on older phones.']},
+      {label:'Research and number checks',   e:2, ex:['Reconcile this report against the spreadsheet.', 'Compare these five vendors on price and terms.', 'Check these figures against the source filings.']},
+      {label:'A long run with a clear goal', e:3, ex:['Keep going until the build takes 3 minutes.', 'Move every page to the new layout, then test.', 'Fix failing tests until all 400 pass.']}]},
+    {give:'Give Fable the hard puzzles.', jobs:[
+      {label:'Analysis that has to go deep',     e:2, ex:['This analysis is surface level. Go deeper.', 'What is really driving the drop in renewals?', 'What would a skeptical investor ask about this?']},
+      {label:'Strategy and big calls',           e:2, ex:['Is this the right product to build next?', 'Should we compete on price or on reliability?', 'Which of these three markets do we enter first?']},
+      {label:'A long run with an open question', e:2, ex:['Find out why it fails one run in ten.', 'Work out the fastest this can possibly go.', 'Find what our best customers have in common.']},
+      {label:'Deep research to a finished deck', e:2, ex:['Research this market and build the deck.', 'Read these 40 papers and write the review.', 'Size this opportunity, with sources, as a memo.']}]}
+  ];
+  var JOBS = [];
+  WORK.forEach(function(w, mi){ w.jobs.forEach(function(j){ j.m = mi; JOBS.push(j); }); });
+
+  var $ = function(id){ return document.getElementById(id); };
+  function el(tag, cls, text){ var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function worker(id, size){ return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 120 120" aria-hidden="true"><use href="#w-' + id + '"/></svg>'; }
+  function checklist(ticks, h){
+    var w = Math.round(h * 64 / 84), rows = '';
+    for (var i = 0; i < 5; i++){
+      var y = 10 + i * 14, on = i < ticks;
+      rows += '<rect x="10" y="' + y + '" width="9" height="9" fill="none" stroke="' + (on ? '#111' : '#B9BED0') + '" stroke-width="2"/>' +
+              (on ? '<path d="M11.5 ' + (y + 4.5) + 'l2.6 2.8 5.2-6.4" fill="none" stroke="#C42A1C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>' : '') +
+              '<path d="M26 ' + (y + 4.5) + 'h28" stroke="#B9BED0" stroke-width="2.6" stroke-linecap="round"/>';
+    }
+    return '<svg width="' + w + '" height="' + h + '" viewBox="0 0 64 84" aria-hidden="true"><rect x="2" y="2" width="60" height="80" fill="#fff" stroke="#111" stroke-width="2.5"/>' + rows + '</svg>';
+  }
+  function money(n){ return n >= 100 ? '$' + Math.round(n).toLocaleString('en-US') : '$' + n.toFixed(2); }
+
+  // ---- part 1: the four workers ---------------------------------------------
+  MODELS.forEach(function(m){
+    var s = el('div', 'scene');
+    var pic = el('div', 'pic'); pic.innerHTML = worker(m.id, 112); s.appendChild(pic);
+    s.appendChild(el('div', 'tag', m.name));
+    s.appendChild(el('div', 'st', m.title));
+    s.appendChild(el('div', 'cap', m.cap));
+    s.appendChild(el('div', 'price', '$' + (m.out < 1 ? m.out.toFixed(2) : m.out) + ' · ' + m.mult));
+    $('cast').appendChild(s);
+  });
+
+  // ---- part 2: the five checklists --------------------------------------------
+  EFFORTS.forEach(function(e, i){
+    var s = el('div', 'scene');
+    var pic = el('div', 'pic short'); pic.innerHTML = checklist(i + 1, 84); s.appendChild(pic);
+    s.appendChild(el('div', 'tag', e.name));
+    s.appendChild(el('div', 'st', e.title));
+    s.appendChild(el('div', 'cap', e.cap));
+    $('levels').appendChild(s);
+  });
+
+  // ---- part 3: one card per model, its jobs, the effort for each ------------------
+  var state = {job: JOBS.indexOf(WORK[2].jobs[0]), m:2, e:1};
+  WORK.forEach(function(w, mi){
+    var m = MODELS[mi], card = el('div', 'mcard');
+    var head = el('div', 'mhead'), pic = el('div', 'mpic'); pic.innerHTML = worker(m.id, 76); head.appendChild(pic);
+    var names = el('div', 'mnames'); names.appendChild(el('div', 'tag', m.name)); names.appendChild(el('div', 'st', w.give));
+    head.appendChild(names); card.appendChild(head);
+    w.jobs.forEach(function(j){
+      var i = JOBS.indexOf(j);
+      var btn = el('button', 'job'); btn.type = 'button'; btn.id = 'job-' + i;
+      btn.appendChild(el('span', 'jn', j.label));
+      btn.appendChild(el('span', 'jv', EFFORTS[j.e].name + ' effort'));
+      btn.appendChild(el('span', 'go', 'Examples ›'));
+      btn.addEventListener('click', function(){
+        state.job = i; state.m = mi; state.e = j.e; say(''); render();
+        // The page stays where it is. Part 4 is already in view; tint it so the eye goes there.
+        var band = $('examples');
+        band.classList.remove('flash'); void band.offsetWidth; band.classList.add('flash');
+      });
+      card.appendChild(btn);
+    });
+    $('mcards').appendChild(card);
+  });
+
+  // ---- part 4: each button changes exactly one setting ---------------------------
+  function say(t){ $('moved').textContent = t; }
+  $('fix-shallow').addEventListener('click', function(){
+    if (state.m < 3){ state.m += 1; render(); say('Model went up one. Depth comes from the model.'); return; }
+    if (state.e < 3){ state.e += 1; render(); say('Already on Fable. Effort went up one level.'); return; }
+    say('Already on Fable at xhigh. Give it more to read.');
+  });
+  $('fix-effort').addEventListener('click', function(){
+    if (state.e >= 4){ say('Effort is already at max. Try a bigger model.'); return; }
+    state.e += 1; render(); say('Effort went up one level. Same model.');
+  });
+  $('fix-model').addEventListener('click', function(){
+    if (state.m >= 3){ say('Fable is the top. Split the job into smaller parts.'); return; }
+    state.m += 1; render(); say('Model went up one. Same effort.');
+  });
+  $('fix-down').addEventListener('click', function(){
+    if (state.m <= 0){ say('Haiku is already the cheapest.'); return; }
+    state.m -= 1; render(); say('Model went down one. Same effort, lower price.');
+  });
+  $('fix-brief').addEventListener('click', function(){ say('Nothing changed. Rewrite the instructions first.'); });
+
+  // ---- part 5: cost -----------------------------------------------------------------
+  function drawCosts(){
+    var jobs = parseInt($('jobs').value, 10) || 0;
+    $('jobsout').textContent = jobs;
+    var rows = MODELS.map(function(m){ return (20000 * m.inp + 4000 * m.out) / 1e6 * jobs * 30; });
+    var top = Math.max.apply(null, rows) || 1;
+    var box = $('costs'); box.textContent = '';
+    MODELS.forEach(function(m, i){
+      var row = el('div', 'crow' + (i === state.m ? ' on' : ''));
+      row.appendChild(el('span', 'cn', m.name));
+      var bar = el('span', 'cbar'), fill = el('span', 'cfill'); fill.style.width = Math.max(0.6, 100 * rows[i] / top) + '%';
+      bar.appendChild(fill); row.appendChild(bar);
+      row.appendChild(el('span', 'cval', money(rows[i]) + ' a month'));
+      box.appendChild(row);
+    });
+  }
+  $('jobs').addEventListener('input', drawCosts);
+
+  // ---- the rules to copy --------------------------------------------------------------
+  // A model-advisor skill. It names model families only (no version numbers), so it does not go stale.
+  function family(m){ return m.name.split(' ')[0]; }
+  var lines = [
+    '---',
+    'name: model-advisor',
+    'description: Recommend which Claude model (Haiku, Sonnet, Opus or Fable) and which effort level (low, medium, high, xhigh, max) fits the task at hand. Use when the user asks which model or effort to use, says an answer was shallow or wrong, or starts a long or costly job.',
+    '---',
+    '',
+    '# Model advisor',
+    '',
+    'Give one verdict first, then one line of why. Example: "Opus, high effort. A bug in live code needs its edge cases checked."',
+    '',
+    '## The two settings',
+    '',
+    '- Model is how capable. A bigger model handles vague, hard problems.',
+    '- Effort is how thorough. Higher effort reads more and checks more.',
+    '',
+    '## Jobs for each model'
+  ];
+  WORK.forEach(function(w, mi){
+    lines.push('', '### ' + family(MODELS[mi]), '');
+    w.jobs.forEach(function(j){ lines.push('- ' + j.label + ': ' + EFFORTS[j.e].name + ' effort.'); });
+  });
+  lines.push('', '## Not sure', '', 'Opus at medium effort.', '', '## When the answer is wrong', '');
+  lines.push('- Instructions were vague: rewrite them first.');
+  lines.push('- Shallow analysis: use a bigger model.');
+  lines.push('- It skipped a check: raise effort.');
+  lines.push('- It checked and was still wrong: use a bigger model.');
+  lines.push('- The work has been routine for a while: use a smaller model.');
+  lines.push('', '## Keep it current', '');
+  lines.push('This skill names model families, not versions. Before you quote a version or a price, read Anthropic\'s models page: https://platform.claude.com/docs/en/about-claude/models/overview');
+  $('snip').value = lines.join('\n');
+  var timer = null;
+  $('copy').addEventListener('click', function(){
+    var done = function(){ $('copied').textContent = 'Copied.'; clearTimeout(timer); timer = setTimeout(function(){ $('copied').textContent = ''; }, 2500); };
+    var manual = function(){ $('snip').focus(); $('snip').select(); $('copied').textContent = 'Selected. Press Ctrl or Cmd + C.'; };
+    if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText($('snip').value).then(done, manual); } else { manual(); }
+  });
+
+  // ---- draw the current pick ------------------------------------------------------------
+  function render(){
+    var m = MODELS[state.m], e = EFFORTS[state.e];
+    JOBS.forEach(function(_, i){ $('job-' + i).setAttribute('aria-pressed', String(i === state.job)); });
+    var job = JOBS[state.job], jm = MODELS[job.m];
+    $('expic').innerHTML = worker(jm.id, 52);
+    var t = $('extitle'); t.textContent = '';
+    t.appendChild(el('b', '', jm.name)); t.appendChild(document.createTextNode(' · ' + job.label + ' · '));
+    t.appendChild(el('b', '', EFFORTS[job.e].name + ' effort'));
+    var row = $('exrow'); row.textContent = '';
+    job.ex.forEach(function(q, n){
+      var s = el('div', 'scene');
+      s.appendChild(el('div', 'tag', 'Ask ' + (n + 1)));
+      s.appendChild(el('div', 'quote', '“' + q + '”'));
+      row.appendChild(s);
+    });
+    var now = $('now'); now.textContent = 'Right now: ';
+    now.appendChild(el('b', '', m.name)); now.appendChild(document.createTextNode(' at ')); now.appendChild(el('b', '', e.name));
+    drawCosts();
+  }
+  render();
+})();
+</script>
+</body>
+</html>
