@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FinExtractBench</title>
-<meta name="description" content="Can AI copy the key figures from investment-fund reports into a spreadsheet without a wrong number? A locked-answer test on 30 real reports. By Russell Miller.">
+<meta name="description" content="Can AI copy the key figures from investment-fund reports into a spreadsheet without a wrong number? What the job is, why it goes wrong, and a locked-answer test on 30 real reports. By Russell Miller.">
 <meta property="og:title" content="FinExtractBench: counting the wrong numbers">
 <meta property="og:description" content="30 fund reports, answer key sealed first, one try each. Two AIs made zero mistakes; a control AI made one.">
 <meta property="og:type" content="article">
@@ -73,12 +73,38 @@
 </div></header>
 
 <section class="part"><div class="inner">
-  <div class="eyebrow">The problem</div>
+  <div class="eyebrow">The job</div>
   <h2>Investors retype the same figures by hand, every quarter.</h2>
-  <p>Pension funds, university endowments and family offices put money into private funds: private equity, venture capital and similar. Every three months each fund sends them a report as a PDF, and every fund lays its report out differently.</p>
-  <p>Someone on the investor's team then retypes the important figures into a spreadsheet: how much money was promised to the fund, how much has been handed over, what the holdings are worth now, how much cash came back. An investor in 50 funds does this 200 times a year.</p>
-  <p>AI could do the copying. But here a wrong number is far worse than a gap. A gap gets noticed and filled in by a person. A wrong number looks like every other number, passes review, and ends up in reports and decisions.</p>
-  <p class="callout">So this test asks one question first: <b>does the AI ever write a number that is wrong?</b></p>
+  <p>Pension funds, university endowments, insurers and family offices put money into private funds: private equity, venture capital, private credit. Every three months each fund sends its investors a report, usually a PDF of 3 to 60 pages, and every fund lays it out differently.</p>
+  <p>The investor needs the same dozen or so figures from every report, side by side in one spreadsheet, to know what its money is worth and what it owes. Pulling those figures out of a document and into a structured table is called <b>extraction</b>.</p>
+  <h3>Who does it</h3>
+  <ul>
+    <li><b>Investment operations analysts</b> at the investor, often by hand.</li>
+    <li><b>Fund administrators</b>, firms paid to keep investors' books.</li>
+    <li><b>Software vendors</b> that sell extraction; one, Canoe Intelligence, says it processes 1.6 million documents a month.</li>
+  </ul>
+  <p>The work is large and dull. One private-markets investor posted publicly that he logged 211 hours reading agreements, chasing capital-call notices and reconciling reports that no two managers format alike.</p>
+</div></section>
+
+<section class="part"><div class="inner">
+  <div class="eyebrow">Why it goes wrong</div>
+  <h2>The right number is usually on the page, next to several wrong ones.</h2>
+  <ul>
+    <li><b>Look-alike figures.</b> A 57-page report showed two tables a few lines apart: what the fund paid into its investments ($817.1 million) and what investors paid into the fund ($822.7 million). Only the second is "paid-in capital". In an earlier round, 7 of 10 AIs took the wrong one.</li>
+    <li><b>Look-alike quantities.</b> One report listed both the number of fund units investors bought and the money called from them. An AI in this test entered the units as money.</li>
+    <li><b>Several periods side by side.</b> Tables show this quarter, last quarter and last year in adjacent columns; taking the wrong column gives a real-looking, wrong number.</li>
+    <li><b>Units and currencies.</b> "50.7" can mean $50.7 million or 50,700 thousand; Australian or Canadian dollars can be mislabelled as US dollars.</li>
+    <li><b>Missing figures.</b> Many reports simply do not state some figures. A careless reader, human or AI, fills the gap with something plausible.</li>
+    <li><b>Scans.</b> Some reports arrive as pictures of pages, with no text inside the file to search.</li>
+  </ul>
+</div></section>
+
+<section class="part"><div class="inner">
+  <div class="eyebrow">Why AI struggles</div>
+  <h2>AI reads fluently, so its wrong answers look as confident as its right ones.</h2>
+  <p>A modern AI can read a whole report in seconds and finds most figures correctly. Its failures are the traps above: it picks the neighbouring figure, the wrong column, or fills a gap with a plausible number. And it does not warn you. In an earlier round, chat-style AIs rated their own wrong answers at 70 to 100 out of 100 for confidence.</p>
+  <p>So a team cannot trust the AI's own sense of certainty, and checking every figure by hand removes most of the time saved. What a buyer needs to know is simpler: <b>does this AI ever write a wrong number, and how often?</b></p>
+  <p class="callout">A blank is cheap: a person sees it and fills it in. A wrong number looks like every other number, passes review, and ends up in reports and decisions. So this test counts wrong numbers first.</p>
 </div></section>
 
 <section class="part"><div class="inner">
