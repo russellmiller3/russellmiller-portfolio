@@ -157,7 +157,7 @@
     <thead><tr><th>AI</th><th>How it read</th><th>Wrong values</th><th>Wrong values, 3 runs</th><th>Items right</th><th>Left blank</th><th>Reports read</th><th>Cost per report</th><th>Seconds per report</th></tr></thead>
     <tbody>
       <tr><td>Gemini 4 Hydrogen (Google)</td><td>PDF</td><td>0</td><td>0 / 0 / 0</td><td>249 of 264</td><td>15</td><td>30</td><td>$0.12</td><td>61</td></tr>
-      <tr><td>Claude Sonnet 5.5 (Anthropic)</td><td>PDF</td><td>0</td><td>0 / 0 / 0</td><td>237 of 242</td><td>5</td><td>29 (1 no answer)</td><td>$0.15</td><td>17</td></tr>
+      <tr><td>Claude Sonnet 5.5 (Anthropic)</td><td>PDF</td><td>0</td><td>0 / 0 / 0</td><td>237 of 242</td><td>5</td><td>29 (1 unreadable answer)</td><td>$0.15</td><td>17</td></tr>
       <tr><td>Gemini 4 Neon (Google)</td><td>PDF</td><td>0</td><td>1 run only</td><td>245 of 256</td><td>11</td><td>29 (1 ran out of room)</td><td>$0.30</td><td>120</td></tr>
       <tr><td>GPT-6.2 Sol (OpenAI)</td><td>PDF</td><td>0</td><td>0 / 1 / 1</td><td>245 of 264</td><td>19</td><td>30</td><td>$0.15</td><td>22</td></tr>
       <tr><td>GPT-6 Luna (OpenAI)</td><td>PDF</td><td>0</td><td>0 / 1 / 2</td><td>260 of 264</td><td>4</td><td>30</td><td>$0.01</td><td>27</td></tr>
@@ -165,15 +165,15 @@
       <tr><td>Gemini 4 Carbon (Google)</td><td>PDF</td><td>1</td><td>1 run only</td><td>252 of 264</td><td>12</td><td>30</td><td>$0.14</td><td>91</td></tr>
       <tr><td>Claude Opus 5.5 (Anthropic)</td><td>PDF</td><td>1</td><td>1 run only</td><td>252 of 264</td><td>12</td><td>30</td><td>$0.32</td><td>72</td></tr>
       <tr><td>Gemini 3.5 Flash (Google)</td><td>PDF</td><td>1</td><td>1 run only</td><td>251 of 264</td><td>13</td><td>30</td><td>$0.09</td><td>31</td></tr>
-      <tr><td>Kimi K3.1 Pro (Moonshot)</td><td>text copy</td><td>1</td><td>1 run only</td><td>213 of 228</td><td>15</td><td>26 (4 no answer)</td><td>$0.15</td><td>139</td></tr>
-      <tr><td>DeepSeek V4.1 Flash (DeepSeek)</td><td>text copy</td><td>2</td><td>1 run only</td><td>218 of 235</td><td>17</td><td>27 (1 no answer, 1 ran out of room, 1 too large)</td><td>$0.01</td><td>43</td></tr>
+      <tr><td>Kimi K3.1 Pro (Moonshot)</td><td>text copy</td><td>1</td><td>1 run only</td><td>213 of 228</td><td>15</td><td>26 (2 ran out of room, 2 too large)</td><td>$0.15</td><td>139</td></tr>
+      <tr><td>DeepSeek V4.1 Flash (DeepSeek)</td><td>text copy</td><td>2</td><td>1 run only</td><td>218 of 235</td><td>17</td><td>27 (1 ran out of room, 2 too large)</td><td>$0.01</td><td>43</td></tr>
       <tr><td>Gemini 3.5 Flash Lite (Google)</td><td>PDF</td><td>4</td><td>1 run only</td><td>251 of 264</td><td>13</td><td>30</td><td>$0.01</td><td>7</td></tr>
       <tr><td>Inkling 2 Small (Thinking Machines)</td><td>text copy</td><td>4</td><td>1 run only</td><td>220 of 235</td><td>15</td><td>27 (1 ran out of room, 2 too large)</td><td>$0.01</td><td>61</td></tr>
-      <tr><td>Qwen3.6 Flash (Alibaba)</td><td>text copy</td><td>4</td><td>1 run only</td><td>207 of 228</td><td>21</td><td>26 (1 no answer, 2 too large, 1 unreadable answer)</td><td>$0.01</td><td>46</td></tr>
+      <tr><td>Qwen3.6 Flash (Alibaba)</td><td>text copy</td><td>4</td><td>1 run only</td><td>207 of 228</td><td>21</td><td>26 (2 too large, 2 unreadable answer)</td><td>$0.01</td><td>46</td></tr>
       <tr><td>GLM 5.3 Flash (Zhipu)</td><td>text copy</td><td>5</td><td>1 run only</td><td>219 of 235</td><td>16</td><td>27 (1 ran out of room, 2 too large)</td><td>$0.01</td><td>83</td></tr>
       <tr><td>Inkling 2 Mini (Thinking Machines)</td><td>text copy</td><td>6</td><td>1 run only</td><td>179 of 194</td><td>15</td><td>22 (6 ran out of room, 2 too large)</td><td>$0.01</td><td>35</td></tr>
       <tr><td>Inkling (Thinking Machines)</td><td>text copy</td><td>7</td><td>1 run only</td><td>226 of 243</td><td>17</td><td>28 (2 too large)</td><td>$0.05</td><td>47</td></tr>
-      <tr><td>MiniMax M3.1 Flash (MiniMax)</td><td>text copy</td><td>11</td><td>1 run only</td><td>229 of 243</td><td>14</td><td>28 (2 ran out of room)</td><td>$0.01</td><td>30</td></tr>
+      <tr><td>MiniMax M3.1 Flash (MiniMax)</td><td>text copy</td><td>11</td><td>1 run only</td><td>229 of 243</td><td>14</td><td>28 (2 too large)</td><td>$0.01</td><td>30</td></tr>
       <tr><td>Claude Haiku 5.5 (Anthropic)</td><td>PDF</td><td>12</td><td>1 run only</td><td>253 of 264</td><td>11</td><td>30</td><td>$0.02</td><td>16</td></tr>
       <tr><td>An empty answer sheet</td><td></td><td>0</td><td></td><td>0 of 264</td><td>264</td><td>30</td><td>$0.00</td><td>0</td></tr>
     </tbody>
