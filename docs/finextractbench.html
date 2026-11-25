@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FinExtractBench</title>
-<meta name="description" content="A sealed test of how often AI writes a wrong number when it copies private-fund reports into a spreadsheet. 30 reports, 781 pages, answer key sealed before any AI read them. By Russell Miller.">
+<meta name="description" content="Can AI copy the key figures from investment-fund reports into a spreadsheet without a wrong number? A locked-answer test on 30 real reports. By Russell Miller.">
 <meta property="og:title" content="FinExtractBench: counting the wrong numbers">
 <meta property="og:description" content="30 fund reports, answer key sealed first, one try each. Two AIs made zero mistakes; a control AI made one.">
 <meta property="og:type" content="article">
@@ -68,136 +68,127 @@
 
 <header class="hero"><div class="inner">
   <div class="by"><span><b>Russell Miller</b> · <a href="https://russellmiller.io/">russellmiller.io</a></span><span>24 November 2026</span></div>
-  <h1>FinExtractBench: counting the wrong numbers</h1>
-  <p class="sub">How often does AI write a wrong value when it copies a fund report into a spreadsheet? A blank is cheap: a person fills it. A wrong number looks right and stays.</p>
+  <h1>FinExtractBench: can AI copy a fund report without a single wrong number?</h1>
+  <p class="sub">I tested three AI systems on 30 real investment-fund reports. Each had to pull 22 key figures and facts into a spreadsheet. I counted one thing above all: how often it wrote a wrong number.</p>
 </div></header>
 
 <section class="part"><div class="inner">
+  <div class="eyebrow">The problem</div>
+  <h2>Investors retype the same figures by hand, every quarter.</h2>
+  <p>Pension funds, university endowments and family offices put money into private funds: private equity, venture capital and similar. Every three months each fund sends them a report as a PDF, and every fund lays its report out differently.</p>
+  <p>Someone on the investor's team then retypes the important figures into a spreadsheet: how much money was promised to the fund, how much has been handed over, what the holdings are worth now, how much cash came back. An investor in 50 funds does this 200 times a year.</p>
+  <p>AI could do the copying. But here a wrong number is far worse than a gap. A gap gets noticed and filled in by a person. A wrong number looks like every other number, passes review, and ends up in reports and decisions.</p>
+  <p class="callout">So this test asks one question first: <b>does the AI ever write a number that is wrong?</b></p>
+</div></section>
+
+<section class="part"><div class="inner">
   <div class="eyebrow">The result</div>
-  <h2>Two AIs made zero mistakes on 30 sealed reports. A control AI made one.</h2>
+  <h2>Two AIs made no mistakes in 30 reports. The third made one.</h2>
   <div class="stats">
-    <div class="stat"><b>30</b><span>fund reports, 781 pages</span></div>
-    <div class="stat"><b>22</b><span>facts asked per report</span></div>
-    <div class="stat red"><b>0</b><span>mistakes: GPT-6.2 Sol, Gemini 4 Hydrogen</span></div>
-    <div class="stat"><b>1</b><span>mistake: Gemini 4 Carbon, the control</span></div>
+    <div class="stat"><b>30</b><span>real fund reports, 781 pages</span></div>
+    <div class="stat"><b>22</b><span>figures and facts asked of each</span></div>
+    <div class="stat red"><b>0</b><span>wrong values: GPT-6.2 Sol and Gemini 4 Hydrogen</span></div>
+    <div class="stat"><b>1</b><span>wrong value: Gemini 4 Carbon</span></div>
   </div>
-  <p>The answer key was written and sealed before any AI read a report. Each AI read each raw PDF once.</p>
-  <p>A mistake is a wrong value, a value for a fact the report does not state, or an event it does not support.</p>
-  <p class="callout">Zero in 30 still allows a mistake in about 1 report in 10 (95% confidence). This test shows big gaps between AIs, not small ones.</p>
+  <p>GPT-6.2 Sol is made by OpenAI; Gemini 4 Hydrogen and Gemini 4 Carbon are made by Google. They cost 12 to 15 cents a report.</p>
+  <p>Gemini 4 Carbon was included on purpose because it had made a mistake in an earlier round. It is the <b>control</b>: if it had also scored zero, the reports might simply have been too easy to catch anyone out. Its one mistake shows the test can catch errors.</p>
+  <p class="note">How sure can we be? 30 reports is a small sample. Zero mistakes in 30 is consistent with a true mistake rate of up to about 1 report in 10 (at 95% confidence). The test separates good from bad AIs, not good from slightly better.</p>
 </div></section>
 
 <section class="part"><div class="inner">
-  <div class="eyebrow">Why count mistakes</div>
-  <h2>Facts found is the wrong score for this work.</h2>
-  <p>Private-fund investors get one report per fund per quarter, each in its own layout. Someone copies the numbers and events into a spreadsheet by hand.</p>
-  <p>A blank costs a person a minute. A wrong value passes review and flows into decisions. So this test counts mistakes first.</p>
-  <p>Every score sits beside an all-blank answer sheet (0 mistakes, 0 facts), so no AI wins by saying nothing.</p>
-</div></section>
-
-<section class="part"><div class="inner">
-  <div class="eyebrow">How it works</div>
-  <h2>Choose, key, seal, run once, review blind.</h2>
-  <ol>
-    <li><b>Choose:</b> reports picked by rules written first; each PDF fingerprinted.</li>
-    <li><b>Key:</b> written by Claude, an AI not tested here; each answer quote-checked.</li>
-    <li><b>Seal:</b> keys, prompt and scorer fingerprinted before any AI ran.</li>
-    <li><b>Run once:</b> each AI reads each raw PDF one time.</li>
-    <li><b>Review blind:</b> every disagreement judged from the page, values unlabelled.</li>
-  </ol>
-  <p>The blind review judged 57 disagreements: key right 19, AI right 22, both valid 16. The 32 key fixes apply to every AI.</p>
-  <h3>The 22 facts</h3>
+  <div class="eyebrow">What each AI had to find</div>
+  <h2>22 items per report</h2>
   <ul>
-    <li>Fund, manager, period end, manager's outlook</li>
-    <li>Committed, paid-in, unfunded, net asset value, distributions, calls, borrowing</li>
-    <li>Net IRR, TVPI, DPI, number of companies</li>
-    <li>Events: investments, exits, add-ons, leadership, contracts, after period end</li>
+    <li><b>Who and when:</b> fund name, manager name, the date the report covers, the manager's outlook.</li>
+    <li><b>Money promised and paid:</b> committed capital (the total investors promised), paid-in capital (how much they have handed over), unfunded commitment (what is still owed), money called this quarter.</li>
+    <li><b>Value and cash back:</b> net asset value (what the holdings are worth today), distributions (cash paid back, to date and this quarter), fund-level borrowing.</li>
+    <li><b>Returns:</b> IRR (average yearly return), TVPI (total value per dollar paid in), DPI (cash returned per dollar paid in), number of companies held.</li>
+    <li><b>This quarter's events:</b> new investments, companies sold, add-on purchases, leadership changes, new contracts, events after quarter end.</li>
   </ul>
-  <p class="note">Only facts a report states are scored: 270 across the 30 reports.</p>
+  <p class="note">Many reports leave some of these out. Only the 270 items the 30 reports actually state are scored. An AI that fills in an item the report never mentions has made a mistake.</p>
 </div></section>
 
 <section class="part"><div class="inner">
-  <div class="eyebrow">Results</div>
-  <h2>Sealed round: 30 reports, one run each</h2>
+  <div class="eyebrow">How I kept it fair</div>
+  <h2>The right answers were written down and locked before any AI saw a report.</h2>
+  <ol>
+    <li><b>Reports chosen by rules.</b> Picked from web searches by rules written in advance, so I could not choose reports that suited one AI.</li>
+    <li><b>Answer key written first.</b> The answer key is the list of correct answers. Each records its page and the report's exact words, checked by a program. Claude, an AI from Anthropic that was not tested, drafted it.</li>
+    <li><b>Key locked.</b> The key and the instructions were stamped with a digital fingerprint before any AI ran, so any later change shows. Every change since is recorded with its reason.</li>
+    <li><b>One try each.</b> Each AI read each PDF exactly once. No reruns, no picking the best attempt.</li>
+    <li><b>Disagreements judged blind.</b> Wherever an AI differed from the key, the report page decided, without knowing which answer came from the AI.</li>
+  </ol>
+  <p>That last step mattered most. Before it, the key disagreed with GPT-6.2 Sol 16 times and with Gemini 4 Hydrogen 12 times. Judged from the pages, all 28 were errors or gaps in the key, not the AI. Across all 57 disagreements, the key was right 19 times, the AI 22 times, and both readings were acceptable 16 times. The corrected key applies to every AI.</p>
+</div></section>
+
+<section class="part"><div class="inner">
+  <div class="eyebrow">Full results</div>
+  <h2>All 30 reports, after the key was corrected</h2>
   <div class="table"><table>
-    <thead><tr><th>AI</th><th>Mistakes</th><th>Flagged before review</th><th>Facts right (of 270)</th><th>Blanks</th><th>Cost / report</th><th>Time / report</th></tr></thead>
+    <thead><tr><th>AI</th><th>Wrong values</th><th>Items right (of 270)</th><th>Left blank</th><th>Cost per report</th><th>Seconds per report</th></tr></thead>
     <tbody>
-      <tr><td>GPT-6.2 Sol</td><td>0</td><td>16</td><td>251</td><td>19</td><td>$0.15</td><td>22 s</td></tr>
-      <tr><td>Gemini 4 Hydrogen</td><td>0</td><td>12</td><td>255</td><td>15</td><td>$0.12</td><td>61 s</td></tr>
-      <tr><td>Gemini 4 Carbon (control)</td><td>1</td><td>not run then</td><td>258</td><td>12</td><td>$0.14</td><td>91 s</td></tr>
-      <tr><td>All-blank sheet</td><td>0</td><td>0</td><td>0</td><td>270</td><td>$0</td><td>0 s</td></tr>
+      <tr><td>GPT-6.2 Sol (OpenAI)</td><td>0</td><td>251</td><td>19</td><td>$0.15</td><td>22</td></tr>
+      <tr><td>Gemini 4 Hydrogen (Google)</td><td>0</td><td>255</td><td>15</td><td>$0.12</td><td>61</td></tr>
+      <tr><td>Gemini 4 Carbon (Google, control)</td><td>1</td><td>258</td><td>12</td><td>$0.14</td><td>91</td></tr>
+      <tr><td>An empty answer sheet</td><td>0</td><td>0</td><td>270</td><td>$0</td><td>0</td></tr>
     </tbody>
   </table></div>
-  <p>The control found the most facts, and still made the only mistake: units investors bought, entered as capital called. Ranked by facts found, it would have won.</p>
-  <p>All 28 flags against the finalists before review traced to the key, not the AI. Review the key where AIs disagree, and show scores before and after.</p>
+  <p>The last row is there for comparison: an AI that answered nothing would also have zero mistakes, which is why items right are shown too.</p>
+  <p>The control found the most items, yet it was the only one to write a wrong value: it entered the number of fund units investors had bought as the money called from them. Ranked by items found, it would have looked best.</p>
 
-  <h2>Scanned copies: 10 of the 30</h2>
-  <div class="table"><table>
-    <thead><tr><th>AI</th><th>Copy</th><th>Mistakes</th><th>Facts right (of 81)</th><th>Blanks</th><th>Cost / report</th></tr></thead>
-    <tbody>
-      <tr><td>GPT-6.2 Sol</td><td>scanned</td><td>0</td><td>72</td><td>9</td><td>$0.21</td></tr>
-      <tr><td>GPT-6.2 Sol</td><td>typed</td><td>0</td><td>70</td><td>11</td><td>$0.16</td></tr>
-      <tr><td>Gemini 4 Hydrogen</td><td>scanned</td><td>0</td><td>70</td><td>11</td><td>$0.09</td></tr>
-      <tr><td>Gemini 4 Hydrogen</td><td>typed</td><td>0</td><td>72</td><td>9</td><td>$0.10</td></tr>
-    </tbody>
-  </table></div>
-  <p class="note">Computer-made scans, cleaner than an office scanner's. Zero in 10 allows about 1 in 4.</p>
+  <h3>Scanned reports</h3>
+  <p>Many reports arrive as scans: pictures of pages, with no text inside the file. I turned 10 of the 30 into scans and ran the two leading AIs again. Both still made zero mistakes and found about as many items (Sol 72 of 81, Hydrogen 70 of 81). These were clean computer-made scans; real office scans are messier.</p>
 
-  <h2>Two AIs checking each other</h2>
-  <p>Accepting only facts where both finalists agree: 205 of 660 facts accepted, 0 mistakes, 66 sent to a person.</p>
-  <p class="note">It misses a fact both leave blank: 5 here.</p>
+  <h3>Two AIs checking each other</h3>
+  <p>A practical setup: two AIs read each report, an item is accepted only when both give the same answer, and the rest go to a person. On these 30 reports that accepted 205 items with zero mistakes and sent 66 to a person. Its blind spot is an item both AIs miss: 5 here.</p>
 </div></section>
 
 <section class="part"><div class="inner">
   <div class="eyebrow">Limits</div>
   <h2>What this test does not show</h2>
   <ul>
-    <li><b>One AI wrote the key.</b> Blind review fixed it where tested AIs disagreed; my own hand check against the pages is under way.</li>
-    <li><b>30 reports.</b> Zero bounds the rate only at about 1 in 10.</li>
-    <li><b>One run per AI.</b> Run-to-run variation not measured.</li>
-    <li><b>Public, digital, English reports.</b> At most 56 pages; one was a request for quotes, not a report.</li>
-    <li><b>One rule changed after launch.</b> The control ran after key review; its check was not blind.</li>
-    <li><b>Few AIs sealed.</b> Two finalists from an earlier 32-report round, plus one control.</li>
+    <li><b>An AI drafted the answer key.</b> The blind review corrected it wherever a tested AI disagreed, and I am checking a sample by hand. Published finance tests usually have two people write the key separately.</li>
+    <li><b>30 reports is small.</b> It catches an AI that slips often, not one that slips rarely.</li>
+    <li><b>One try per AI.</b> The same AI may do a little better or worse on another run.</li>
+    <li><b>Public, digital, English reports, up to 56 pages.</b> One turned out to be a pension plan's request for quotes, not a report; the rules picked it, so it stayed.</li>
+    <li><b>One rule changed mid-test.</b> The control was meant to run only if the leaders scored zero before the key was corrected. They did only after, so the control ran then, and its answers were not judged blind.</li>
+    <li><b>Only three AIs.</b> The two leaders came from an earlier round of 32 reports.</li>
   </ul>
 </div></section>
 
 <section class="part"><div class="inner">
   <div class="eyebrow">Check it yourself</div>
-  <h2>The code and the practice keys are public.</h2>
-  <ul>
-    <li><b>Code:</b> <a href="https://github.com/russellmiller3/finextractbench">github.com/russellmiller3/finextractbench</a></li>
-    <li><b>Inside:</b> fact list, prompt, scorer, 32 practice keys</li>
-    <li><b>Reports:</b> downloaded from each publisher, fingerprint-checked</li>
-    <li><b>Sealed:</b> the 30 test keys, so new AIs are scored unseen</li>
-  </ul>
+  <h2>The code and the practice answer keys are public.</h2>
+  <p>Anyone can rerun the test on 32 practice reports and see exactly how answers are scored: <a href="https://github.com/russellmiller3/finextractbench">github.com/russellmiller3/finextractbench</a>. It downloads each report from its publisher and checks it is the same file I used.</p>
+  <p class="note">The answer keys for the 30 test reports stay private, so future AIs can be tested on reports they cannot have seen.</p>
 </div></section>
 
 <section class="part"><div class="inner">
   <div class="eyebrow">Related work</div>
   <h2>Where this sits</h2>
   <ul class="refs">
-    <li>FinanceBench, Islam et al. 2023 (<a href="https://arxiv.org/abs/2311.11944">arXiv:2311.11944</a>): public-company filings, page-cited answers.</li>
-    <li>Pervasive Label Errors in Test Sets, Northcutt et al. 2021 (<a href="https://arxiv.org/abs/2103.14749">arXiv:2103.14749</a>): key errors found where models disagree.</li>
-    <li>FinTagging (<a href="https://arxiv.org/abs/2505.20650">arXiv:2505.20650</a>) and FinCriticalED (<a href="https://arxiv.org/abs/2511.14998">arXiv:2511.14998</a>): finance keys made by two readers.</li>
+    <li>FinanceBench, Islam et al. 2023 (<a href="https://arxiv.org/abs/2311.11944">arXiv:2311.11944</a>): questions about public companies' filings, answered with page references. This test differs: private-fund reports, the PDF read directly, scored on wrong values.</li>
+    <li>"Pervasive Label Errors in Test Sets", Northcutt et al. 2021 (<a href="https://arxiv.org/abs/2103.14749">arXiv:2103.14749</a>): answer keys of well-known tests contain errors, best found where AIs disagree with them, as happened here.</li>
+    <li>FinTagging (<a href="https://arxiv.org/abs/2505.20650">arXiv:2505.20650</a>) and FinCriticalED (<a href="https://arxiv.org/abs/2511.14998">arXiv:2511.14998</a>): finance tests whose keys two people wrote separately.</li>
   </ul>
 </div></section>
 
 <section class="part"><div class="inner">
   <div class="eyebrow">Your reports</div>
   <h2>The same test on your own documents</h2>
-  <p>The method works on any financial document: write the key, seal it, one try each, count the wrong values.</p>
-  <p>If your team still re-keys fund reports or capital-call notices by hand, the same sealed test can run on 20 of yours.</p>
+  <p>If your team retypes figures from fund reports, capital-call notices or other financial documents, I can run this same locked-key test on 20 of yours. You see which AI you could trust with them, and where a person still needs to check.</p>
 </div></section>
 
 <section class="part"><div class="inner">
   <div class="eyebrow">Who built this</div>
   <h2>Russell Miller, operating leader and AI architect</h2>
-  <p>I design and ship production AI systems: retrieval, agents and evaluations built on frontier models. More of my work is on <a href="https://russellmiller.io/">russellmiller.io</a>.</p>
+  <p>I design and ship production AI systems: search over company documents, AI agents, and tests of how well they work. More of my work is on <a href="https://russellmiller.io/">russellmiller.io</a>.</p>
   <ul>
     <li><b>Email:</b> <a href="mailto:rmiller@zavient.com">rmiller@zavient.com</a></li>
     <li><b>LinkedIn:</b> <a href="https://linkedin.com/in/russellmiller">linkedin.com/in/russellmiller</a></li>
   </ul>
 </div></section>
 
-<footer><div class="inner">Russell Miller · <a href="https://russellmiller.io/">russellmiller.io</a> · Runs of 21 and 22 November 2026.</div></footer>
+<footer><div class="inner">Russell Miller · <a href="https://russellmiller.io/">russellmiller.io</a> · Tests run 21 and 22 November 2026.</div></footer>
 </body>
 </html>
