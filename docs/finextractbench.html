@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FinExtractBench</title>
-<meta name="description" content="Can AI copy the key figures from investment-fund reports into a spreadsheet without a wrong number? What the job is, why it goes wrong, and a locked-answer test on 30 real reports. By Russell Miller.">
+<meta name="description" content="Can AI copy the key figures from investment-fund reports into a spreadsheet without a wrong number? 19 AIs on 30 real reports with a locked answer key. By Russell Miller.">
 <meta property="og:title" content="FinExtractBench: counting the wrong numbers">
-<meta property="og:description" content="30 fund reports, answer key sealed first, one try each. Two AIs made zero mistakes; a control AI made one.">
+<meta property="og:description" content="19 AIs, 30 real fund reports, answer key locked first, one try each. Three made zero wrong values.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://russellmiller.io/finextractbench.html">
 <link rel="canonical" href="https://russellmiller.io/finextractbench.html">
@@ -69,7 +69,7 @@
 <header class="hero"><div class="inner">
   <div class="by"><span><b>Russell Miller</b> · <a href="https://russellmiller.io/">russellmiller.io</a></span><span>24 November 2026</span></div>
   <h1>FinExtractBench: can AI copy a fund report without a single wrong number?</h1>
-  <p class="sub">I tested three AI systems on 30 real investment-fund reports. Each had to pull 22 key figures and facts into a spreadsheet. I counted one thing above all: how often it wrote a wrong number.</p>
+  <p class="sub">I tested 19 AI systems on 30 real investment-fund reports. Each had to pull 22 key figures and facts into a spreadsheet. I counted one thing above all: how often it wrote a wrong number.</p>
 </div></header>
 
 <section class="part"><div class="inner">
@@ -109,15 +109,16 @@
 
 <section class="part"><div class="inner">
   <div class="eyebrow">The result</div>
-  <h2>Two AIs made no mistakes in 30 reports. The third made one.</h2>
+  <h2>Of 19 AIs, three made no mistakes on all 30 reports. The cheapest of them found the most.</h2>
   <div class="stats">
+    <div class="stat"><b>19</b><span>AIs from 8 makers</span></div>
     <div class="stat"><b>30</b><span>real fund reports, 781 pages</span></div>
-    <div class="stat"><b>22</b><span>figures and facts asked of each</span></div>
-    <div class="stat red"><b>0</b><span>wrong values: GPT-6.2 Sol and Gemini 4 Hydrogen</span></div>
-    <div class="stat"><b>1</b><span>wrong value: Gemini 4 Carbon</span></div>
+    <div class="stat red"><b>3</b><span>with zero wrong values on all 30</span></div>
+    <div class="stat"><b>1¢</b><span>per report for the best one</span></div>
   </div>
-  <p>GPT-6.2 Sol is made by OpenAI; Gemini 4 Hydrogen and Gemini 4 Carbon are made by Google. They cost 12 to 15 cents a report.</p>
-  <p>Gemini 4 Carbon was included on purpose because it had made a mistake in an earlier round. It is the <b>control</b>: if it had also scored zero, the reports might simply have been too easy to catch anyone out. Its one mistake shows the test can catch errors.</p>
+  <p>The three with no wrong value on all 30 reports: <b>GPT-6 Luna</b> (OpenAI), which also found the most items right, 262 of 267, at about 1 cent a report; <b>Gemini 4 Hydrogen</b> (Google), 252 of 267; and <b>GPT-6.2 Sol</b> (OpenAI), 248 of 267.</p>
+  <p>Two more had no wrong value but did not finish every report: Claude Sonnet 5.5 (Anthropic) and Gemini 4 Neon (Google's newest), 29 of 30 each. Claude Opus 5.5, Gemini 4 Argon, Gemini 3.5 Flash and Gemini 4 Carbon made one wrong value each. The rest made 2 to 12.</p>
+  <p>Gemini 4 Carbon was first run on purpose as a <b>control</b>, because it had made a mistake in an earlier round: if it had scored zero too, the reports might have been too easy to catch anyone out. It made one here, which shows the test catches errors.</p>
   <p class="note">How sure can we be? 30 reports is a small sample. Zero mistakes in 30 is consistent with a true mistake rate of up to about 1 report in 10 (at 95% confidence). The test separates good from bad AIs, not good from slightly better.</p>
 </div></section>
 
@@ -131,7 +132,7 @@
     <li><b>Returns:</b> IRR (average yearly return), TVPI (total value per dollar paid in), DPI (cash returned per dollar paid in), number of companies held.</li>
     <li><b>This quarter's events:</b> new investments, companies sold, add-on purchases, leadership changes, new contracts, events after quarter end.</li>
   </ul>
-  <p class="note">Many reports leave some of these out. Only the 270 items the 30 reports actually state are scored. An AI that fills in an item the report never mentions has made a mistake.</p>
+  <p class="note">Many reports leave some of these out. Only the 267 items the 30 reports clearly state are scored. An AI that fills in an item the report never mentions has made a mistake.</p>
 </div></section>
 
 <section class="part"><div class="inner">
@@ -141,29 +142,47 @@
     <li><b>Reports chosen by rules.</b> Picked from web searches by rules written in advance, so I could not choose reports that suited one AI.</li>
     <li><b>Answer key written first.</b> The answer key is the list of correct answers. Each records its page and the report's exact words, checked by a program. Claude, an AI from Anthropic that was not tested, drafted it.</li>
     <li><b>Key locked.</b> The key and the instructions were stamped with a digital fingerprint before any AI ran, so any later change shows. Every change since is recorded with its reason.</li>
-    <li><b>One try each.</b> Each AI read each PDF exactly once. No reruns, no picking the best attempt.</li>
+    <li><b>One try each, default settings.</b> Each AI read each PDF exactly once, at its maker's default effort setting, with the same instructions. No picking the best attempt. A call only repeats if it never reached the AI, or the network dropped it.</li>
     <li><b>Disagreements judged blind.</b> Wherever an AI differed from the key, the report page decided, without knowing which answer came from the AI.</li>
   </ol>
-  <p>That last step mattered most. Before it, the key disagreed with GPT-6.2 Sol 16 times and with Gemini 4 Hydrogen 12 times. Judged from the pages, all 28 were errors or gaps in the key, not the AI. Across all 57 disagreements, the key was right 19 times, the AI 22 times, and both readings were acceptable 16 times. The corrected key applies to every AI.</p>
+  <p>That last step mattered most. In the first round the key disagreed with GPT-6.2 Sol 16 times and with Gemini 4 Hydrogen 12 times, and judged from the pages all 28 were errors or gaps in the key. When every other AI was added, 117 more disagreements were judged the same way: the key was right 76 times, the AI 34 times, both readings were acceptable 5 times, and neither 2 times. Every correction applies to every AI.</p>
 </div></section>
 
 <section class="part"><div class="inner">
   <div class="eyebrow">Full results</div>
-  <h2>All 30 reports, after the key was corrected</h2>
+  <h2>Every AI tested, on all 30 reports, after the key was corrected</h2>
+<!-- TABLE:START -->
   <div class="table"><table>
-    <thead><tr><th>AI</th><th>Wrong values</th><th>Items right (of 270)</th><th>Left blank</th><th>Cost per report</th><th>Seconds per report</th></tr></thead>
+    <thead><tr><th>AI</th><th>Wrong values</th><th>Items right</th><th>Left blank</th><th>Reports read</th><th>Cost per report</th><th>Seconds per report</th></tr></thead>
     <tbody>
-      <tr><td>GPT-6.2 Sol (OpenAI)</td><td>0</td><td>251</td><td>19</td><td>$0.15</td><td>22</td></tr>
-      <tr><td>Gemini 4 Hydrogen (Google)</td><td>0</td><td>255</td><td>15</td><td>$0.12</td><td>61</td></tr>
-      <tr><td>Gemini 4 Carbon (Google, control)</td><td>1</td><td>258</td><td>12</td><td>$0.14</td><td>91</td></tr>
-      <tr><td>An empty answer sheet</td><td>0</td><td>0</td><td>270</td><td>$0</td><td>0</td></tr>
+      <tr><td>GPT-6 Luna (OpenAI)</td><td>0</td><td>262 of 267</td><td>5</td><td>30</td><td>$0.01</td><td>27</td></tr>
+      <tr><td>Gemini 4 Hydrogen (Google)</td><td>0</td><td>252 of 267</td><td>15</td><td>30</td><td>$0.12</td><td>61</td></tr>
+      <tr><td>GPT-6.2 Sol (OpenAI)</td><td>0</td><td>248 of 267</td><td>19</td><td>30</td><td>$0.15</td><td>22</td></tr>
+      <tr><td>Gemini 4 Argon (Google)</td><td>1</td><td>256 of 267</td><td>11</td><td>30</td><td>$0.09</td><td>30</td></tr>
+      <tr><td>Gemini 4 Carbon (Google)</td><td>1</td><td>255 of 267</td><td>12</td><td>30</td><td>$0.14</td><td>91</td></tr>
+      <tr><td>Claude Opus 5.5 (Anthropic)</td><td>1</td><td>255 of 267</td><td>12</td><td>30</td><td>$0.32</td><td>72</td></tr>
+      <tr><td>Gemini 3.5 Flash (Google)</td><td>1</td><td>254 of 267</td><td>13</td><td>30</td><td>$0.09</td><td>31</td></tr>
+      <tr><td>Gemini 3.5 Flash Lite (Google)</td><td>4</td><td>253 of 267</td><td>14</td><td>30</td><td>$0.01</td><td>7</td></tr>
+      <tr><td>Claude Haiku 5.5 (Anthropic)</td><td>12</td><td>254 of 267</td><td>13</td><td>30</td><td>$0.02</td><td>16</td></tr>
+      <tr><td>Claude Sonnet 5.5 (Anthropic)</td><td>0</td><td>238 of 243</td><td>5</td><td>29 (1 unreadable answer)</td><td>$0.15</td><td>17</td></tr>
+      <tr><td>Gemini 4 Neon (Google)</td><td>0</td><td>248 of 259</td><td>11</td><td>29 (1 ran out of room)</td><td>$0.30</td><td>120</td></tr>
+      <tr><td>Kimi K3.1 Pro (Moonshot)</td><td>1</td><td>216 of 231</td><td>15</td><td>26 (2 ran out of room, 2 too large)</td><td>$0.15</td><td>139</td></tr>
+      <tr><td>DeepSeek V4.1 Flash (DeepSeek)</td><td>2</td><td>221 of 238</td><td>17</td><td>27 (1 ran out of room, 2 too large)</td><td>$0.01</td><td>43</td></tr>
+      <tr><td>Inkling 2 Small (Thinking Machines)</td><td>4</td><td>223 of 238</td><td>15</td><td>27 (1 ran out of room, 2 too large)</td><td>$0.01</td><td>61</td></tr>
+      <tr><td>Qwen3.6 Flash (Alibaba)</td><td>4</td><td>209 of 231</td><td>22</td><td>26 (2 too large, 2 unreadable answer)</td><td>$0.01</td><td>46</td></tr>
+      <tr><td>GLM 5.3 Flash (Zhipu)</td><td>5</td><td>222 of 238</td><td>16</td><td>27 (1 ran out of room, 2 too large)</td><td>$0.01</td><td>83</td></tr>
+      <tr><td>Inkling 2 Mini (Thinking Machines)</td><td>6</td><td>182 of 197</td><td>15</td><td>22 (6 ran out of room, 2 too large)</td><td>$0.01</td><td>35</td></tr>
+      <tr><td>Inkling (Thinking Machines)</td><td>7</td><td>229 of 246</td><td>17</td><td>28 (2 too large)</td><td>$0.05</td><td>47</td></tr>
+      <tr><td>MiniMax M3.1 Flash (MiniMax)</td><td>11</td><td>231 of 246</td><td>15</td><td>28 (2 too large)</td><td>$0.01</td><td>30</td></tr>
+      <tr><td>An empty answer sheet</td><td>0</td><td>0 of 267</td><td>267</td><td>30</td><td>$0.00</td><td>0</td></tr>
     </tbody>
   </table></div>
-  <p>The last row is there for comparison: an AI that answered nothing would also have zero mistakes, which is why items right are shown too.</p>
-  <p>The control found the most items, yet it was the only one to write a wrong value: it entered the number of fund units investors had bought as the money called from them. Ranked by items found, it would have looked best.</p>
+<!-- TABLE:END -->
+  <p>Sorted by wrong values, then items right. The last row is for comparison: an AI that answered nothing would also have zero wrong values, which is why items right are shown too.</p>
+  <p class="note">Why some AIs read fewer than 30 reports. <b>Ran out of room:</b> the AI spent its whole answer allowance (32,000 words of thinking) before answering. <b>Too large:</b> AIs that cannot read a PDF directly get OpenRouter's text copy of it, and 2 of the reports were too large to convert. <b>Unreadable answer:</b> the reply was not in the required format. Each counts as that AI's one try.</p>
 
   <h3>Scanned reports</h3>
-  <p>Many reports arrive as scans: pictures of pages, with no text inside the file. I turned 10 of the 30 into scans and ran the two leading AIs again. Both still made zero mistakes and found about as many items (Sol 72 of 81, Hydrogen 70 of 81). These were clean computer-made scans; real office scans are messier.</p>
+  <p>Many reports arrive as scans: pictures of pages, with no text inside the file. I turned 10 of the 30 into scans and ran the first round's two leaders, GPT-6.2 Sol and Gemini 4 Hydrogen, again. Both still made zero mistakes and found about as many items (Sol 72 of 81, Hydrogen 70 of 81). These were clean computer-made scans; real office scans are messier.</p>
 
   <h3>Two AIs checking each other</h3>
   <p>A practical setup: two AIs read each report, an item is accepted only when both give the same answer, and the rest go to a person. On these 30 reports that accepted 205 items with zero mistakes and sent 66 to a person. Its blind spot is an item both AIs miss: 5 here.</p>
@@ -178,7 +197,7 @@
     <li><b>One try per AI.</b> The same AI may do a little better or worse on another run.</li>
     <li><b>Public, digital, English reports, up to 56 pages.</b> One turned out to be a pension plan's request for quotes, not a report; the rules picked it, so it stayed.</li>
     <li><b>One rule changed mid-test.</b> The control was meant to run only if the leaders scored zero before the key was corrected. They did only after, so the control ran then, and its answers were not judged blind.</li>
-    <li><b>Only three AIs.</b> The two leaders came from an earlier round of 32 reports.</li>
+    <li><b>Default settings only.</b> Each AI ran at its maker's default effort; a higher setting might change a result.</li>
   </ul>
 </div></section>
 
